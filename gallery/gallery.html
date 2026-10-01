@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>گالری کامل تصاویر · انجمن نجوم نوا</title>
+    <link rel="stylesheet" href="../assets/BootStrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <canvas id="sky" aria-hidden="true"></canvas>
+
+    <header>
+        <div class="wrap bar">
+            <a class="brand" href="../index.html" aria-label="انجمن نجوم نوا">
+                <svg viewBox="0 0 200 200" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stop-color="#fff" />
+                            <stop offset=".55" stop-color="#8fefe0" />
+                            <stop offset="1" stop-color="#7b6bef" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M100,20 C107,76 115,100 178,100 C115,100 107,124 100,180 C93,124 85,100 22,100 C85,100 93,76 100,20 Z" fill="url(#lg)" />
+                </svg>
+                انجمن نجوم نوا
+            </a>
+            <button class="menu" aria-expanded="false" aria-controls="nav">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="#ffffff"/>
+                    <path d="M2 12.0322C2 11.4799 2.44772 11.0322 3 11.0322H21C21.5523 11.0322 22 11.4799 22 12.0322C22 12.5845 21.5523 13.0322 21 13.0322H3C2.44772 13.0322 2 12.5845 2 12.0322Z" fill="#ffffff"/>
+                    <path d="M3 17.0645C2.44772 17.0645 2 17.5122 2 18.0645C2 18.6167 2.44772 19.0645 3 19.0645H21C21.5523 19.0645 22 18.6167 22 18.0645C22 17.5122 21.5523 17.0645 21 17.0645H3Z" fill="#ffffff"/>
+                </svg>
+            </button>
+            <nav id="nav">
+                <a href="../index.html#about">درباره ما</a>
+                <a href="../index.html#events">رویدادها</a>
+                <a href="../index.html#news">اخبار</a>
+                <a href="../gallery.html">گالری</a>
+                <a href="../index.html#team">اعضا</a>
+                <a href="../index.html#join">عضویت</a>
+            </nav>
+            <a class="btn" href="../index.html#join">عضویت</a>
+        </div>
+    </header>
+
+    <main class="wrap detail-page">
+        <a href="../index.html#gallery" class="back-link">← بازگشت به صفحه اصلی</a>
+
+        <div class="rv" style="margin-bottom: 2rem;">
+            <h2>گالری جامع تصاویر نجومی</h2>
+            <p class="lead">مجموعه کامل عکس‌های ثبت‌شده توسط عکاسان و اعضای انجمن نجوم نوا.</p>
+        </div>
+
+        <!-- شبکه‌ی کامل گالری -->
+        <div class="full-gallery">
+            
+            <!-- نمونه آیتم ۱ -->
+            <div class="card gallery-card">
+                <div class="gallery-img-wrap">
+                    <i class="i1"></i> <!-- یا جایگزین با <img src="آدرس_عکس.jpg" alt="عنوان"> -->
+                </div>
+                <div class="gallery-card-body">
+                    <span class="tag">سحابی</span>
+                    <h3>سحابی در آسمان تاریک</h3>
+                    <p>ثبت شده در شب رصد کویر مرنجاب با نوردهی ۳۰ ثانیه‌ای و دوربین DSLR.</p>
+                    <small class="gallery-meta">عکاس: مریم حسینی · مهر ۱۴۰۳</small>
+                </div>
+            </div>
+
+            <!-- نمونه آیتم ۲ -->
+            <div class="card gallery-card">
+                <div class="gallery-img-wrap">
+                    <i class="i2"></i>
+                </div>
+                <div class="gallery-card-body">
+                    <span class="tag w">ماه</span>
+                    <h3>طلوع ماه کامل</h3>
+                    <p>تصویر طلوع ماه کامل بر فراز دشت رصدگاه انجمن در یک شب صاف پاییزی.</p>
+                    <small class="gallery-meta">عکاس: رضا احمدی · آبان ۱۴۰۳</small>
+                </div>
+            </div>
+
+            <!-- نمونه آیتم ۳ -->
+            <div class="card gallery-card">
+                <div class="gallery-img-wrap">
+                    <i class="i3"></i>
+                </div>
+                <div class="gallery-card-body">
+                    <span class="tag t">راه شیری</span>
+                    <h3>کمان راه شیری در کویر</h3>
+                    <p>ثبت سراسرنمای (پانوراما) قوس کهکشان راه شیری در یکی از تاریک‌ترین نقاط ایران.</p>
+                    <small class="gallery-meta">عکاس: علی رضایی · مرداد ۱۴۰۳</small>
+                </div>
+            </div>
+
+            <!-- نمونه آیتم ۴ -->
+            <div class="card gallery-card">
+                <div class="gallery-img-wrap">
+                    <i class="i5"></i>
+                </div>
+                <div class="gallery-card-body">
+                    <span class="tag">سیارات</span>
+                    <h3>مشتری و قمرهای گالیله‌ای</h3>
+                    <p>نمای مشتری به همراه چهار قمر اصلی آن که از پشت تلسکوپ ۸ اینچ ثبت شده است.</p>
+                    <small class="gallery-meta">عکاس: سپهر ابراهیمی · شهریور ۱۴۰۳</small>
+                </div>
+            </div>
+
+            <!-- نمونه آیتم ۵ -->
+            <div class="card gallery-card">
+                <div class="gallery-img-wrap">
+                    <i class="i6"></i>
+                </div>
+                <div class="gallery-card-body">
+                    <span class="tag t">کهکشان</span>
+                    <h3>کهکشان آندرومدا (M31)</h3>
+                    <p>همسایه ژرف کیهانی ما در فاصله ۲.۵ میلیون سال نوری. حاصل ترکیب ۲۰ فریم نوردهی.</p>
+                    <small class="gallery-meta">عکاس: شایان توکلی · دی ۱۴۰۳</small>
+                </div>
+            </div>
+
+            <!-- نمونه آیتم ۶ (کارت جدید) -->
+            <div class="card gallery-card">
+                <div class="gallery-img-wrap">
+                    <i class="i4"></i>
+                </div>
+                <div class="gallery-card-body">
+                    <span class="tag w">پدیده آسمانی</span>
+                    <h3>شفق پیش از آغاز رصد</h3>
+                    <p>نمایی زیبا از رنگ‌های شامگاهی دشت پیش از تاریک شدن کامل آسمان و شروع برنامه‌های رصد.</p>
+                    <small class="gallery-meta">عکاس: مهسا کیانی · اسفند ۱۴۰۳</small>
+                </div>
+            </div>
+
+            <!-- برای اضافه کردن عکس جدید، کافیست یکی از کدهای بالا را کپی کرده و اطلاعات آن را تغییر دهید -->
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="wrap foot">
+            <div>© انجمن نجوم نوا · همه‌ی حقوق محفوظ است.</div>
+            <div class="soc">
+                <a href="#">شاد</a><a href="#">روبیکا</a><a href="#">آپارات</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/index.js"></script>
+</body>
+
+</html>

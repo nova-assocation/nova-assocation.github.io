@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>انجمن نجوم نوا</title>
+    <link rel="stylesheet" href="assets/BootStrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <canvas id="sky" aria-hidden="true"></canvas>
+
+    <header>
+        <div class="wrap bar">
+            <a class="brand" href="#top" aria-label="انجمن نجوم نوا">
+                <svg viewBox="0 0 200 200" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stop-color="#fff" />
+                            <stop offset=".55" stop-color="#8fefe0" />
+                            <stop offset="1" stop-color="#7b6bef" />
+                        </linearGradient>
+                    </defs>
+                    <path
+                        d="M100,20 C107,76 115,100 178,100 C115,100 107,124 100,180 C93,124 85,100 22,100 C85,100 93,76 100,20 Z"
+                        fill="url(#lg)" />
+                </svg>
+                انجمن نجوم نوا
+            </a>
+            <button class="menu" aria-expanded="false" aria-controls="nav"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="#ffffff"/>
+            <path d="M2 12.0322C2 11.4799 2.44772 11.0322 3 11.0322H21C21.5523 11.0322 22 11.4799 22 12.0322C22 12.5845 21.5523 13.0322 21 13.0322H3C2.44772 13.0322 2 12.5845 2 12.0322Z" fill="#ffffff"/>
+            <path d="M3 17.0645C2.44772 17.0645 2 17.5122 2 18.0645C2 18.6167 2.44772 19.0645 3 19.0645H21C21.5523 19.0645 22 18.6167 22 18.0645C22 17.5122 21.5523 17.0645 21 17.0645H3Z" fill="#ffffff"/>
+            </svg></button>
+            <nav id="nav">
+                <a href="#about">درباره ما</a><a href="#events">رویدادها</a><a href="#news">اخبار</a><a
+                    href="#gallery">گالری</a><a href="#team">اعضا</a><a href="#join">عضویت</a>
+            </nav>
+            <a class="btn" href="#join">عضویت</a>
+            <!-- دکمه تغییر تم -->
+            <!-- دکمه تغییر تم مدرن -->
+            <button class="theme-switch" id="themeToggleBtn" aria-label="تغییر تم">
+                <span class="theme-switch-track">
+                    <span class="theme-switch-thumb">
+                        <span id="themeIcon">🌙</span>
+                    </span>
+                </span>
+            </button>
+        </div>
+    </header>
+
+    <main id="top">
+        <section class="hero">
+            <div class="wrap">
+                <svg class="nova" viewBox="0 0 200 200" role="img"
+                    aria-label="ستاره‌ی نوا در مرکز، با سیاره‌هایی در حال گردش به دورش">
+                    <defs>
+                        <radialGradient id="glow">
+                            <stop offset="0" stop-color="#eafcff" stop-opacity=".9" />
+                            <stop offset=".5" stop-color="#4fd8e8" stop-opacity=".3" />
+                            <stop offset="1" stop-color="#4fd8e8" stop-opacity="0" />
+                        </radialGradient>
+                        <radialGradient id="sf" cx="42%" cy="38%">
+                            <stop offset="0" stop-color="#fff" />
+                            <stop offset=".55" stop-color="#cdeeff" />
+                            <stop offset="1" stop-color="#6fa8f0" />
+                        </radialGradient>
+                        <linearGradient id="ringgrad" x1="0" x2="1">
+                            <stop offset="0" stop-color="#8b7bff" stop-opacity="0" />
+                            <stop offset=".5" stop-color="#eafcff" stop-opacity=".95" />
+                            <stop offset="1" stop-color="#8b7bff" stop-opacity="0" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="100" cy="100" r="44" fill="none" stroke="rgba(180,205,255,.16)" stroke-width="1" />
+                    <circle cx="100" cy="100" r="66" fill="none" stroke="rgba(180,205,255,.14)" stroke-width="1" />
+                    <circle cx="100" cy="100" r="88" fill="none" stroke="rgba(180,205,255,.1)" stroke-width="1" />
+                    <circle class="halo" cx="100" cy="100" r="58" fill="url(#glow)" />
+                    <circle cx="100" cy="100" r="38" fill="url(#sf)" />
+                    <text x="100" y="106" text-anchor="middle" class="nova-word">NOVA</text>
+                    <g class="p1">
+                        <circle cx="144" cy="100" r="5" fill="#8fefe0" />
+                    </g>
+                    <g class="p2">
+                        <circle cx="100" cy="34" r="4" fill="#a9c9ff" />
+                    </g>
+                    <g class="p3">
+                        <g transform="translate(188,100)">
+                            <circle r="7" fill="#ffd8a6" />
+                        </g>
+                    </g>
+                </svg>
+                <h1>بیایید آسمان را بهتر بشناسیم...</h1>
+                <p>انجمن نجوم نوا؛ جایی برای رصد، آموختن و شگفت‌زده شدن در برابر آسمان شب.</p>
+                <div class="cta"><a class="btn" href="#join">عضو شو</a><a class="btn ghost" href="#events">رصدهای
+                        پیش‌رو</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="wrap about rv">
+                <div>
+                    <h2>درباره ما</h2>
+                    <p class="lead" style="margin-bottom:1rem">«نوا» نام ستاره‌ای است که ناگهان می‌درخشد. ما گروهی از
+                        دانش آموزانیم،
+                        که می‌خواهیم نجوم را از کتاب به آسمان واقعی ببریم.</p>
+                    <b>هدف‌های ما</b>
+                    <ul class="goals">
+                        <li>برگزاری رصدهای عمومی و رایگان برای همه‌ی سنین</li>
+                        <li>آموزش کار با تلسکوپ، نقشه‌ی آسمان و عکاسی نجومی</li>
+                        <li>ترویج آگاهی درباره‌ی آلودگی نوری و حفاظت از آسمان تاریک</li>
+                        <li>پیوند دادن علاقه‌مندان و پژوهشگران نجوم</li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 style="font-size:1.4rem;margin-bottom:1.2rem">تاریخچه</h2>
+                    <div class="tl">
+                        <div><b>آغاز راه</b><span>چند دوست با یک تلسکوپ کوچک و شب‌های رصد در پشت‌بام.</span></div>
+                        <div><b>ثبت رسمی انجمن</b><span>شکل‌گیری هیئت مدیره و نخستین دوره‌ی آموزشی.</span></div>
+                        <div><b>رصد عمومی</b><span>اولین شب رصد همگانی در دشت با صدها شرکت‌کننده.</span></div>
+                        <div><b>امروز</b><span>گروه‌های آموزشی، عکاسی و ستاره‌شناسی مقدماتی فعال‌اند.</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="events">
+            <div class="wrap">
+                <div class="rv">
+                    <h2>رویدادها و رصدها</h2>
+                    <p class="lead">برنامه‌های پیش‌رو.</p>
+                </div>
+                <div class="grid g3 rv">
+                    <article class="card"><span class="tag">رصد</span>
+                        <h3>شب رصد سیارات</h3>
+                        <p>مشاهده‌ی مشتری و زحل با تلسکوپ‌های انجمن، به همراه راهنمای رصدگر.</p>
+                        <p class="when">جمعه، ۲۰:۰۰ · دشت رصدگاه</p>
+                        <a href="events/evenr-detail.html" class="btn event-btn">دیدن جزییات</a>
+                    </article>
+                    <article class="card"><span class="tag w">کارگاه</span>
+                        <h3>کارگاه عکاسی از راه شیری</h3>
+                        <p>تنظیمات دوربین، تریپود و ترکیب‌بندی برای ثبت آسمان شب.</p>
+                        <p class="when">شنبه، ۱۷:۰۰ · سالن انجمن</p>
+                    </article>
+                    <article class="card"><span class="tag t">سخنرانی</span>
+                        <h3>مرگ ستارگان و تولد نواخترها</h3>
+                        <p>سخنرانی عمومی درباره‌ی انفجار ستارگان و عناصری که می‌سازند.</p>
+                        <p class="when">سه‌شنبه، ۱۸:۳۰ · برخط و حضوری</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="news">
+            <div class="wrap">
+                <div class="rv">
+                    <h2>اخبار و مقالات</h2>
+                    <p class="lead">یادداشت‌های آموزشی و خبرهای تازه‌ی آسمان.</p>
+                </div>
+                <div class="grid g3 rv">
+                    <article class="card"><span class="tag">مقاله</span>
+                        <h3>چگونه اولین تلسکوپ‌تان را انتخاب کنید</h3>
+                        <p>دیافراگم، فاصله‌ی کانونی و پایه؛ سه چیزی که پیش از خرید باید بدانید.</p>
+                        <a href="articles/article-detail.html" class="btn event-btn">دیدن جزییات</a>
+                    </article>
+                    <article class="card"><span class="tag w">خبر</span>
+                        <h3>گرفتگی ماه در راه است</h3>
+                        <p>زمان و مناطق دید گرفتگی و توصیه‌هایی برای رصد ایمن و لذت‌بخش.</p>
+                    </article>
+                    <article class="card"><span class="tag t">آموزش</span>
+                        <h3>آشنایی با صورت‌های فلکی پاییز</h3>
+                        <p>با چند ستاره‌ی درخشان، نقشه‌ی آسمان پاییز را در ذهن بسازید.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="wrap">
+                <div class="rv">
+                    <h2>گالری آسمان</h2>
+                    <p class="lead">عکس‌های اعضا از رصدها و آسمان شب.</p>
+                </div>
+                <a href="gallery/gallery.html" class="btn btn-gallery">مشاهده کامل گالری تصاویر</a>
+                <div class="gal rv">
+                    <figure><i class="i1"></i>
+                        <figcaption>سحابی در آسمان تاریک</figcaption>
+                    </figure>
+                    <figure><i class="i2"></i>
+                        <figcaption>ماه کامل بالای دشت</figcaption>
+                    </figure>
+                    <figure><i class="i3"></i>
+                        <figcaption>راه شیری در کویر</figcaption>
+                    </figure>
+                    <figure><i class="i4"></i>
+                        <figcaption>شفق پیش از رصد</figcaption>
+                    </figure>
+                    <figure><i class="i5"></i>
+                        <figcaption>مشتری و قمرهایش</figcaption>
+                    </figure>
+                    <figure><i class="i6"></i>
+                        <figcaption>کهکشان مارپیچی</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section id="team">
+            <div class="wrap">
+                <div class="rv">
+                    <h2>اعضا و هیئت مدیره</h2>
+                    <p class="lead">کسانی که شب‌های رصد را ممکن می‌کنند.</p>
+                </div>
+                <div class="team grid g3">
+                    <div class="card mem">
+                        <div class="av">ش</div>
+                        <h3>شایان توکلی دستجرد</h3><small>مدیر انجمن</small>
+                    </div>
+                    <div class="team-member">
+                    <div class="card mem">
+                        <div class="av">س</div>
+                        <h3>سپهر ابراهیمی</h3><small>مسئول فناوری</small>
+                    </div>
+                    <div class="card mem card-mem-last">
+                        <div class="av">م</div>
+                        <h3>مهسا کیانی</h3><small>مسئول آموزش</small>
+                        <p>طراح دوره‌های مقدماتی و کارگاه‌ها</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="additional-members">
+    <div class="wrap">
+        <div class="rv">
+            <h2>سایر همکاران و اعضا</h2>
+            <p class="lead">تیم اجرایی و پشتیبانی انجمن.</p>
+        </div>
+        
+        <!-- کانتینر خودکار برای کارت‌های جدید -->
+        <div class="auto-grid rv">
+            <div class="card mem">
+                <div class="av">ع</div>
+                <h3>علی رضایی</h3>
+                <small>مسئول روابط عمومی</small>
+            </div>
+            <div class="card mem">
+                <div class="av">م</div>
+                <h3>مریم حسینی</h3>
+                <small>عکاس نجومی</small>
+            </div>
+            <div class="card mem">
+                <div class="av">رض</div>
+                <h3>رضا احمدی</h3>
+                <small>مترجم اخبار</small>
+            </div>
+            <div class="card mem">
+                <div class="av">س</div>
+                <h3>سارا کریمی</h3>
+                <small>پشتیبانی سایت</small>
+            </div>
+            <div class="card mem">
+                <div class="av">ح</div>
+                <h3>حسین نوری</h3>
+                <small>هماهنگ‌کننده رصد</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section id="join">
+            <div class="wrap join rv">
+                <div>
+                    <h2>عضویت و تماس</h2>
+                    <p class="lead" style="margin-bottom:1.5rem">فرم زیر را جهت ارسال درخواست عضویت یا پیشنهادات خود
+                        تکمیل کنید.
+                    </p>
+                    <div class="info">
+                        <b>نشانی</b>
+                        <p>شهر شما، خیابان نمونه، پلاک ۱۲</p>
+                        <b>ایمیل</b>
+                        <p dir="ltr" style="text-align:right">info@nova-astro.example</p>
+                        <b>تلفن</b>
+                        <p dir="ltr" style="text-align:right">۰۲۱-۱۲۳۴۵۶۷۸</p>
+                    </div>
+                </div>
+                <form class="card" id="f" novalidate>
+                    <!-- کلید اختصاصی Web3Forms -->
+                    <input type="hidden" name="access_key" value="b88779ab-ad0a-4b3c-b611-3042033b6495">
+
+                    <!-- عنوان ایمیل دریافتی شما -->
+                    <input type="hidden" name="subject" value="درخواست جدید از سایت انجمن نجوم نوا">
+
+                    <label>نام و نام خانوادگی <span style="color:#4fd8e8">*</span>
+                        <input name="n" required autocomplete="name" placeholder="مثال: علی محمدی">
+                    </label>
+
+                    <label>شماره کلاس <span style="color:#4fd8e8">*</span>
+                        <input name="c" required placeholder="مثال: ۸۰۲ یا ۱۰/۳">
+                    </label>
+
+                    <label>آیدی شاد یا ایتا <span style="color:#4fd8e8">*</span>
+                        <input name="id" dir="ltr" style="text-align:right" required placeholder="مثال: @username">
+                    </label>
+
+                    <label>درخواست یا پیشنهاد (در صورت درخواست عضویت، خالی بگذارید)
+                        <textarea name="m" rows="4" placeholder="متن پیام خود را بنویسید..."></textarea>
+                    </label>
+
+                    <button class="btn" type="submit" id="submit-btn">ارسال پیام</button>
+                    <div class="ok" id="ok" role="status"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap foot">
+            <div>© انجمن نجوم نوا · همه‌ی حقوق محفوظ است.</div>
+            <div class="soc">
+                <a href="#">شاد</a><a href="#">روبیکا</a><a href="#">آپارات</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>مقاله آموزشی · انجمن نجوم نوا</title>
+    <link rel="stylesheet" href="../assets/BootStrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <canvas id="sky" aria-hidden="true"></canvas>
+
+    <header>
+        <div class="wrap bar">
+            <a class="brand" href="../index.html" aria-label="انجمن نجوم نوا">
+                <svg viewBox="0 0 200 200" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stop-color="#fff" />
+                            <stop offset=".55" stop-color="#8fefe0" />
+                            <stop offset="1" stop-color="#7b6bef" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M100,20 C107,76 115,100 178,100 C115,100 107,124 100,180 C93,124 85,100 22,100 C85,100 93,76 100,20 Z" fill="url(#lg)" />
+                </svg>
+                انجمن نجوم نوا
+            </a>
+            <button class="menu" aria-expanded="false" aria-controls="nav">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="#ffffff"/>
+                    <path d="M2 12.0322C2 11.4799 2.44772 11.0322 3 11.0322H21C21.5523 11.0322 22 11.4799 22 12.0322C22 12.5845 21.5523 13.0322 21 13.0322H3C2.44772 13.0322 2 12.5845 2 12.0322Z" fill="#ffffff"/>
+                    <path d="M3 17.0645C2.44772 17.0645 2 17.5122 2 18.0645C2 18.6167 2.44772 19.0645 3 19.0645H21C21.5523 19.0645 22 18.6167 22 18.0645C22 17.5122 21.5523 17.0645 21 17.0645H3Z" fill="#ffffff"/>
+                </svg>
+            </button>
+            <nav id="nav">
+                <a href="../index.html#about">درباره ما</a>
+                <a href="../index.html#events">رویدادها</a>
+                <a href="../index.html#news">اخبار</a>
+                <a href="../index.html#gallery">گالری</a>
+                <a href="../index.html#team">اعضا</a>
+                <a href="../index.html#join">عضویت</a>
+            </nav>
+            <a class="btn" href="../index.html#join">عضویت</a>
+        </div>
+    </header>
+
+    <main class="wrap detail-page">
+        <a href="../index.html#news" class="back-link">← بازگشت به اخبار و مقالات</a>
+
+        <article class="card detail-card">
+            <div class="detail-header">
+                <span class="tag t">راهنمای خرید</span>
+                <h1>چگونه اولین تلسکوپ‌‌تان را انتخاب کنید؟</h1>
+                <div class="article-author">
+                    <span>نویسنده: شایان توکلی</span> · <span>زمان مطالعه: ۵ دقیقه</span>
+                </div>
+            </div>
+
+            <div class="detail-content">
+                <p class="lead">خرید اولین تلسکوپ می‌تواند شگفت‌انگیز اما کمی گیج‌کننده باشد. در این مقاله به بررسی ۳ فاکتور کلیدی پیش از خرید می‌‌پردازیم.</p>
+
+                <h3>۱. گشودگی دهانه (Aperture)</h3>
+                <p>مهم‌ترین ویژگی هر تلسکوپ قطر عدسی یا آینه اصلی آن است. هرچه دهانه بزرگ‌تر باشد، نور بیشتری جمع‌آوری کرده و جزئیات دقیق‌تری از اجرام کم‌نور مانند سحابی‌ها را نمایش می‌دهد.</p>
+
+                <h3>۲. فاصله کانونی و بزرگ‌نمایی</h3>
+                <p>برخلاف تصور عموم، بزرگ‌نمایی اصلی‌ترین معیار نیست! بزرگ‌نمایی از حاصل‌تقسیم فاصله کانونی تلسکوپ بر فاصله کانونی چشمی به دست می‌‌آید و قابل تغییر است.</p>
+
+                <h3>۳. نوع پایه (Mount)</h3>
+                <p>پایه‌های سمت‌-ارتفاعی (Alt-Az) ساده‌ترند و برای مبتدیان عالی هستند، اما پایه‌های استوایی (Equatorial) برای ردگیری حرکت اجرام در آسمان مناسب‌ترند.</p>
+
+                <blockquote class="article-quote">
+                    "بهترین تلسکوپ، تلسکوپی است که بیشتر از همه از آن استفاده می‌کنید، نه بزرگ‌ترین یا گران‌ترین آن‌ها!"
+                </blockquote>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="wrap foot">
+            <div>© انجمن نجوم نوا · همه‌ی حقوق محفوظ است.</div>
+            <div class="soc">
+                <a href="#">شاد</a><a href="#">روبیکا</a><a href="#">آپارات</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/index.js"></script>
+</body>
+
+</html>

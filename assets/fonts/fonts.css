@@ -1,0 +1,19 @@
+@font-face {
+    font-family: "Bebas Neue";
+    src: url(Bebas_Neue/BebasNeue-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Pacifico";
+    src: url(Pacifico/Pacifico-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Epilogue";
+    src: url(Epilogue/Epilogue-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: "Vazirmatn";
+    src: url(Vazirmatn/Vazirmatn-VariableFont_wght.ttf);
+}
