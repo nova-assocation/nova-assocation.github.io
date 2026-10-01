@@ -1,5 +1,4 @@
 /* تعریف متغیرها برای تم تیره (پیش‌فرض) */
-/* تعریف متغیرها برای تم تیره (پیش‌فرض) */
 :root,
 [data-bs-theme="dark"] {
     --bg: #060714;
@@ -28,6 +27,7 @@
     --bg-meta: rgba(255, 255, 255, 0.03);
     --bg-box-vio: rgba(123, 107, 239, 0.12);
     --bg-box-pink: rgba(79, 216, 232, 0.08);
+    --nav-link: #aab0dc;
 
     /* پس‌زمینه‌های گالری */
     --img-bg-1: radial-gradient(circle at 30% 40%, #4fd8e8 0, transparent 35%), radial-gradient(circle at 70% 60%, #4aa8ff 0, transparent 40%), #1a1450;
@@ -70,6 +70,7 @@
     --bg-meta: rgba(0, 0, 0, 0.03);
     --bg-box-vio: rgba(90, 73, 224, 0.08);
     --bg-box-pink: rgba(0, 139, 155, 0.08);
+    --nav-link: #aab0dc;
 
     /* پس‌زمینه‌های متناسب با تم روشن */
     --img-bg-1: radial-gradient(circle at 30% 40%, #80e7f2 0, transparent 35%), radial-gradient(circle at 70% 60%, #7ec2ff 0, transparent 40%), #d1d8f7;
@@ -244,7 +245,7 @@ nav {
 }
 
 nav a {
-    color: var(--mut);
+    color: var(--nav-link);
     transition: color .2s
 }
 
