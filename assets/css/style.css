@@ -1,4 +1,5 @@
 /* تعریف متغیرها برای تم تیره (پیش‌فرض) */
+/* تعریف متغیرها برای تم تیره (پیش‌فرض) */
 :root,
 [data-bs-theme="dark"] {
     --bg: #060714;
@@ -17,6 +18,25 @@
     --hero-title-deg1: #fff;
     --hero-title-deg2: #b9d4ff;
     --hero-title-deg3: #8fefe0;
+    
+    /* متغیرهای جدید برای تم تیره */
+    --txt-white: #ffffff;
+    --txt-tag: #9fd0ff;
+    --txt-tag-w: #bdf0f5;
+    --txt-tag-t: #cbbdff;
+    --bg-input: rgba(8, 10, 36, .8);
+    --bg-meta: rgba(255, 255, 255, 0.03);
+    --bg-box-vio: rgba(123, 107, 239, 0.12);
+    --bg-box-pink: rgba(79, 216, 232, 0.08);
+
+    /* پس‌زمینه‌های گالری */
+    --img-bg-1: radial-gradient(circle at 30% 40%, #4fd8e8 0, transparent 35%), radial-gradient(circle at 70% 60%, #4aa8ff 0, transparent 40%), #1a1450;
+    --img-bg-2: radial-gradient(circle at 50% 50%, #ffe9b0 0, #d9a14a 12%, #3a2a5a 40%, #0b0b25 70%);
+    --img-bg-3: conic-gradient(from 200deg at 50% 60%, #0b0d30, #5b3fd0, #4fd8e8, #0b0d30 60%);
+    --img-bg-4: linear-gradient(180deg, #05061a 30%, #2b3290 75%, #6fd9ec);
+    --img-bg-5: radial-gradient(circle at 60% 35%, #cfe6ff 0, #5c8fd6 10%, transparent 11%), radial-gradient(circle at 40% 70%, #8b6bff 0, transparent 45%), #090b26;
+    --img-bg-6: radial-gradient(ellipse at 50% 55%, #cdf3f7 0, #4a7fd6 25%, #22267a 55%, #070818 80%);
+
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -33,13 +53,31 @@
     --ind: #3b45a9;
     --pink: #008b9b;
     --cy2: #00a896;
-    --join: #f4f6fc;
+    --join: #1a1c2e;
     --line: rgba(60, 70, 150, .18);
     --card: rgba(255, 255, 255, .85);
     --header-bg: rgba(244, 246, 252, .82);
     --hero-title-deg1: #1a1c2e;
     --hero-title-deg2: #3b45a9;
     --hero-title-deg3: #008b9b;
+
+    /* متغیرهای جدید برای تم روشن */
+    --txt-white: #ffffff;
+    --txt-tag: #1d7cd6;
+    --txt-tag-w: #008b9b;
+    --txt-tag-t: #5a49e0;
+    --bg-input: rgba(255, 255, 255, .9);
+    --bg-meta: rgba(0, 0, 0, 0.03);
+    --bg-box-vio: rgba(90, 73, 224, 0.08);
+    --bg-box-pink: rgba(0, 139, 155, 0.08);
+
+    /* پس‌زمینه‌های متناسب با تم روشن */
+    --img-bg-1: radial-gradient(circle at 30% 40%, #80e7f2 0, transparent 35%), radial-gradient(circle at 70% 60%, #7ec2ff 0, transparent 40%), #d1d8f7;
+    --img-bg-2: radial-gradient(circle at 50% 50%, #fff2d1 0, #e0b067 12%, #a894d8 40%, #d8dcff 70%);
+    --img-bg-3: conic-gradient(from 200deg at 50% 60%, #d8dcff, #8b73f2, #80e7f2, #d8dcff 60%);
+    --img-bg-4: linear-gradient(180deg, #e2e7f8 30%, #8591eb 75%, #a8eff7);
+    --img-bg-5: radial-gradient(circle at 60% 35%, #ffffff 0, #8eb7f0 10%, transparent 11%), radial-gradient(circle at 40% 70%, #b29eff 0, transparent 45%), #d1d8f7;
+    --img-bg-6: radial-gradient(ellipse at 50% 55%, #e1f7f9 0, #83aee8 25%, #767cc7 55%, #cdd4f7 80%);
 }
 
 *,
@@ -96,7 +134,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 13px;
-    color: #fff;
+    color: var(--txt-white);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
 }
@@ -191,7 +229,7 @@ header {
     gap: .6rem;
     font-weight: 800;
     font-size: 1.1rem;
-    color: white;
+    color: var(--ink);
 }
 
 .brand svg {
@@ -211,7 +249,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #fff
+    color: var(--ink)
 }
 
 .btn {
@@ -220,7 +258,7 @@ nav a:hover {
     cursor: pointer;
     font: inherit;
     font-weight: 600;
-    color: #fff;
+    color: var(--txt-white);
     padding: .7rem 1.6rem;
     border-radius: 999px;
     background: linear-gradient(135deg, var(--vio), var(--pink));
@@ -379,23 +417,23 @@ nav a:hover {
     padding: .1rem .8rem;
     border-radius: 999px;
     background: rgba(74, 168, 255, .16);
-    color: #9fd0ff;
+    color: var(--txt-tag);
     margin-bottom: .7rem;
     width: fit-content;
 }
 
 .tag.w {
     background: rgba(79, 216, 232, .16);
-    color: #bdf0f5
+    color: var(--txt-tag-w)
 }
 
 .tag.t {
     background: rgba(139, 107, 255, .2);
-    color: #cbbdff
+    color: var(--txt-tag-t)
 }
 
 .when {
-    color: #fff;
+    color: var(--ink);
     font-weight: 600;
     font-size: .9rem;
     margin-top: .8rem !important
@@ -508,32 +546,32 @@ nav a:hover {
     inset: auto 0 0 0;
     padding: 1.6rem .9rem .7rem;
     font-size: .9rem;
-    color: white;
+    color: var(--txt-white);
     background: linear-gradient(transparent, rgba(4, 5, 16, .9))
 }
 
 .i1 {
-    background: radial-gradient(circle at 30% 40%, #4fd8e8 0, transparent 35%), radial-gradient(circle at 70% 60%, #4aa8ff 0, transparent 40%), #1a1450
+    background: --img-bg-1;
 }
 
 .i2 {
-    background: radial-gradient(circle at 50% 50%, #ffe9b0 0, #d9a14a 12%, #3a2a5a 40%, #0b0b25 70%)
+    background: --img-bg-2;
 }
 
 .i3 {
-    background: conic-gradient(from 200deg at 50% 60%, #0b0d30, #5b3fd0, #4fd8e8, #0b0d30 60%)
+    background: --img-bg-3;
 }
 
-.i4 {
-    background: linear-gradient(180deg, #05061a 30%, #2b3290 75%, #6fd9ec)
+.i4{
+    background: --img-bg-4;
 }
 
-.i5 {
-    background: radial-gradient(circle at 60% 35%, #cfe6ff 0, #5c8fd6 10%, transparent 11%), radial-gradient(circle at 40% 70%, #8b6bff 0, transparent 45%), #090b26
+.i5{
+    background: --img-bg-5;
 }
 
-.i6 {
-    background: radial-gradient(ellipse at 50% 55%, #cdf3f7 0, #4a7fd6 25%, #22267a 55%, #070818 80%)
+.i6{
+    background: --img-bg-6;
 }
 
 /* members */
@@ -570,7 +608,7 @@ nav a:hover {
 }
 
 .mem small {
-    color: #9fd0ff
+    color: var(--blu)
 }
 
 /*  */
@@ -645,7 +683,7 @@ textarea {
     padding: .7rem .9rem;
     font: inherit;
     color: var(--join);
-    background: rgba(8, 10, 36, .8);
+    background: var(--bg-input);
     border: 1px solid var(--line);
     border-radius: 12px
 }
@@ -664,7 +702,7 @@ textarea:focus {
     padding: .8rem 1rem;
     border-radius: 12px;
     background: rgba(74, 168, 255, .15);
-    color: #cfe6ff
+    color: var(--ink)
 }
 
 .info p {
@@ -701,7 +739,7 @@ footer {
 }
 
 .soc a:hover {
-    color: #fff;
+    color: var(--ink);
     box-shadow: 0 0 18px rgba(139, 107, 255, .5)
 }
 
@@ -799,19 +837,19 @@ footer {
 .detail-header h1 {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     margin: 0.5rem 0 1rem;
-    color: white;
+    color: var(--ink);
 }
 
 .event-meta {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-meta);
     padding: 1rem 1.25rem;
     border-radius: 12px;
     border: 1px solid var(--line);
     font-size: 0.95rem;
-    color: white;
+    color: var(--ink);
 }
 
 .article-author {
@@ -838,11 +876,11 @@ footer {
 .detail-box {
     margin-top: 2rem;
     padding: 1rem 1.25rem;
-    background: rgba(123, 107, 239, 0.12);
+    background: var(--bg-box-vio);
     border-right: 4px solid var(--vio);
     border-radius: 8px;
     font-size: 0.95rem;
-    color: white;
+    color: var(--ink);
 }
 
 .article-quote {
