@@ -16,7 +16,7 @@
     <header>
         <div class="wrap bar">
             <a class="brand" href="#top" aria-label="انجمن نجوم نوا">
-                <svg viewBox="0 0 200 200" aria-hidden="true">
+                <!-- <svg viewBox="0 0 200 200" aria-hidden="true">
                     <defs>
                         <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
                             <stop offset="0" stop-color="#fff" />
@@ -27,8 +27,8 @@
                     <path
                         d="M100,20 C107,76 115,100 178,100 C115,100 107,124 100,180 C93,124 85,100 22,100 C85,100 93,76 100,20 Z"
                         fill="url(#lg)" />
-                </svg>
-                انجمن نجوم نوا
+                </svg> -->
+                <h3 class="Pacifico-font">NOVA</h3>
             </a>
             <button class="menu" aria-expanded="false" aria-controls="nav"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="#ffffff"/>
@@ -39,7 +39,11 @@
                 <a href="#about">درباره ما</a><a href="#events">رویدادها</a><a href="#news">اخبار</a><a
                     href="#gallery">گالری</a><a href="#team">اعضا</a><a href="#join">عضویت</a>
             </nav>
-            <a class="btn" href="#join">عضویت</a>
+            <div>
+                <a href="login/login.html" class="btn p-2" style="font-size: 10px;">ورود اعضا</a>
+                <a class="btn" href="#join">عضویت</a>
+            </div>
+            
             <!-- دکمه تغییر تم -->
             <!-- دکمه تغییر تم مدرن -->
             <button class="theme-switch" id="themeToggleBtn" aria-label="تغییر تم">
@@ -206,16 +210,16 @@
                 </div>
                 <div class="team grid g3">
                     <div class="card mem">
-                        <div class="av">ش</div>
+                        <div class="av shayan"></div>
                         <h3>شایان توکلی دستجرد</h3><small>مدیر انجمن</small>
                     </div>
                     <div class="team-member">
                     <div class="card mem">
-                        <div class="av">س</div>
+                        <div class="av sepehr"></div>
                         <h3>سپهر ابراهیمی</h3><small>مسئول فناوری</small>
                     </div>
                     <div class="card mem card-mem-last">
-                        <div class="av">م</div>
+                        <div class="av meraj"></div>
                         <h3>معراج عیدی درمیان</h3><small>مسئول محتوا</small>
                     </div>
                     </div>
@@ -270,11 +274,11 @@
                     </p>
                     <div class="info">
                         <b>نشانی</b>
-                        <p>شهر شما، خیابان نمونه، پلاک ۱۲</p>
+                        <p>بیرجند، سجادشهر، امامت، دبیرستان شهید بهشتی دوره اول</p>
                         <b>ایمیل</b>
-                        <p dir="ltr" style="text-align:right">info@nova-astro.example</p>
+                        <p dir="ltr" style="text-align:right">Novaastro405@gmail.com</p>
                         <b>تلفن</b>
-                        <p dir="ltr" style="text-align:right">۰۲۱-۱۲۳۴۵۶۷۸</p>
+                        <p dir="ltr" style="text-align:right">tel:056-32461020</p>
                     </div>
                 </div>
                 <form class="card" id="f" novalidate>
@@ -296,7 +300,7 @@
                         <input name="id" dir="ltr" style="text-align:right" required placeholder="مثال: @username">
                     </label>
 
-                    <label>درخواست یا پیشنهاد (در صورت درخواست عضویت، خالی بگذارید)
+                    <label>درخواست یا پیشنهاد (در صورتی که درخواست عضویت دارید، خالی بگذارید)
                         <textarea name="m" rows="4" placeholder="متن پیام خود را بنویسید..."></textarea>
                     </label>
 
