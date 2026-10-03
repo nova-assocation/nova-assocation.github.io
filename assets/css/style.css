@@ -103,6 +103,7 @@ body {
 }
 
 /* استایل دکمه تغییر تم مدرن */
+/* استایل دکمه تغییر تم مدرن */
 .theme-switch {
     background: transparent;
     border: none;
@@ -112,37 +113,64 @@ body {
     align-items: center;
     justify-content: center;
     outline: none;
+    flex-shrink: 0; /* جلوگیری از فشرده شدن دکمه در Flexbox */
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .theme-switch-track {
-    width: 60px;
-    height: 32px;
-    background-color: var(--card);
-    border: 1px solid var(--line);
+    width: 56px;
+    height: 30px;
+    background-color: var(--card, #1a1e29);
+    border: 1px solid var(--line, rgba(255, 255, 255, 0.1));
     border-radius: 999px;
     position: relative;
-    padding: 3px;
+    padding: 2px;
     display: flex;
     align-items: center;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.Pacifico-font{
+.Pacifico-font {
     font-family: 'Pacifico', cursive;
 }
 
 .theme-switch-thumb {
     width: 24px;
     height: 24px;
-    background: linear-gradient(135deg, var(--vio), var(--blu));
+    background: linear-gradient(135deg, var(--vio, #8b5cf6), var(--blu, #3b82f6));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 13px;
-    color: var(--txt-white);
+    color: var(--txt-white, #ffffff);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+    transform: translateX(0); /* حالت پیش‌فرض (تم تاریک/روشن) */
+}
+
+/* حالت فعال بودن تم دارک / لایت (جابه‌جایی دکمه به سمت دیگر) */
+[data-theme="light"] .theme-switch-thumb {
+    transform: translateX(26px); /* در حالت RTL برای جابه‌جایی درست */
+}
+
+/* ---------------------------------- ریسپانسیو برای موبایل (صفحه‌های زیر 768px)---------------------------------- */
+@media (max-width: 768px) {
+    .theme-switch-track {
+        width: 53px;
+        height: 26px;
+    }
+
+    .theme-switch-thumb {
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
+    }
+
+    [data-theme="light"] .theme-switch-thumb {
+        transform: translateX(22px);
+    }
 }
 
 /* جابه‌جایی دایره به سمت دیگر در حالت تم روشن */
