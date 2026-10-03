@@ -127,6 +127,10 @@ body {
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+.Pacifico-font{
+    font-family: 'Pacifico', cursive;
+}
+
 .theme-switch-thumb {
     width: 24px;
     height: 24px;
@@ -594,6 +598,24 @@ nav a:hover {
 
 .mem small {
     color: var(--blu)
+}
+
+.sepehr{
+    background-image: url(../img/sepehr.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.meraj{
+    background-image: url(../img/meraj.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.shayan{
+    background-image: url(../img/shayan.png);
+    background-position: center;
+    background-size: cover;
 }
 
 /*  */
