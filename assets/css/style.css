@@ -102,7 +102,10 @@ body {
     overflow-x: hidden
 }
 
-/* استایل دکمه تغییر تم مدرن */
+.Pacifico-font {
+    font-family: 'Pacifico', cursive;
+}
+
 /* استایل دکمه تغییر تم مدرن */
 .theme-switch {
     background: transparent;
@@ -113,7 +116,7 @@ body {
     align-items: center;
     justify-content: center;
     outline: none;
-    flex-shrink: 0; /* جلوگیری از فشرده شدن دکمه در Flexbox */
+    flex-shrink: 0; /* جلوگیری از تغییر سایز در فلکس هدر */
     user-select: none;
     -webkit-tap-highlight-color: transparent;
 }
@@ -131,10 +134,6 @@ body {
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.Pacifico-font {
-    font-family: 'Pacifico', cursive;
-}
-
 .theme-switch-thumb {
     width: 24px;
     height: 24px;
@@ -147,19 +146,29 @@ body {
     color: var(--txt-white, #ffffff);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
-    transform: translateX(0); /* حالت پیش‌فرض (تم تاریک/روشن) */
+    
+    /* حالت پیش‌فرض (تاریک/دارک) - دکمه سمت راست/چپ قرار می‌گیرد */
+    transform: translateX(0);
 }
 
-/* حالت فعال بودن تم دارک / لایت (جابه‌جایی دکمه به سمت دیگر) */
-[data-theme="light"] .theme-switch-thumb {
-    transform: translateX(26px); /* در حالت RTL برای جابه‌جایی درست */
+/* -------------------------------------------------------------
+    اعمال جابه‌جایی بر اساس data-bs-theme (هماهنگ با جاوا اسکریپت شما)
+------------------------------------------------------------- */
+
+html[data-bs-theme="light"] .theme-switch-thumb {
+    transform: translateX(-26px);
 }
 
-/* ---------------------------------- ریسپانسیو برای موبایل (صفحه‌های زیر 768px)---------------------------------- */
+
+
+/* -------------------------------------------------------------
+    تنظیمات دقیق ریسپانسیو برای موبایل (صفحات زیر 768px)
+------------------------------------------------------------- */
 @media (max-width: 768px) {
     .theme-switch-track {
-        width: 53px;
+        width: 48px;
         height: 26px;
+        padding: 2px;
     }
 
     .theme-switch-thumb {
@@ -168,15 +177,14 @@ body {
         font-size: 11px;
     }
 
-    [data-theme="light"] .theme-switch-thumb {
+    /* جابه‌جایی متناسب با ابعاد کوچک‌تر در موبایل */
+    /* html[data-bs-theme="light"] .theme-switch-thumb {
         transform: translateX(22px);
-    }
-}
+    } */
 
-/* جابه‌جایی دایره به سمت دیگر در حالت تم روشن */
-[data-bs-theme="light"] .theme-switch-thumb {
-    transform: translateX(-28px);
-    background: linear-gradient(135deg, #ff9f43, #ff5252);
+    html[data-bs-theme="light"] .theme-switch-thumb {
+        transform: translateX(-22px);
+    }
 }
 
 .theme-switch:hover .theme-switch-track {
