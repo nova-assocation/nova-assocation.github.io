@@ -277,6 +277,20 @@ nav a:hover {
     transform: translateY(-2px)
 }
 
+.logins {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* فاصله بین دکمه‌ها */
+}
+
+.logins a {
+    flex-shrink: 0;         /* تغییر نیافتن سایز در فلکس */
+    white-space: nowrap;     /* نرفتن متن به خط بعدی */
+    padding: 8px 16px;
+    border-radius: 8px;      /* شعاع گوشه‌ها جهت جلوگیری از دایره شدن */
+    text-align: center;
+}
+
 .btn.ghost {
     background: transparent;
     border: 1px solid var(--line);
@@ -667,6 +681,8 @@ nav a:hover {
         grid-column: span 1 !important;
     }
 }
+
+
 
 /* join */
 .join {
