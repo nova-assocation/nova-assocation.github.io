@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="assets/js/supabase.js"></script>
+    <link href="../assets/fonts/fonts.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div id="live-clock" class="clock-box">⏱️</div>
+        <div id="connection-status" class="status-box" style="color: var(--accent-green);">🟢 اتصال به سامانه مرکزی
+            برقرار است</div>
+
+        <!-- بخش احراز هویت -->
+        <div id="auth-panel" class="card">
+            <h2>ورود به سامانه NOVA</h2>
+            <input type="text" id="login-username" placeholder="نام کاربری">
+            <input type="password" id="login-password" placeholder="رمز عبور">
+            <button id="btn-login">ورود به پنل</button>
+        </div>
+
+        <!-- داشبورد اصلی -->
+        <div id="main-dashboard" class="hidden">
+            <div class="card"
+                style="display: flex; justify-content: space-between; align-items: center; padding: 12px 20px;">
+                <span id="user-welcome" style="font-weight: bold;">در حال بارگذاری...</span>
+                <button id="btn-logout"
+                    style="width: auto; padding: 5px 10px; background-color: var(--accent-red); font-size: 12px;">خروج</button>
+            </div>
+
+            <!-- منوی تب‌ها اعضا -->
+            <div id="member-tabs" class="tab-menu hidden">
+                <button class="tab-btn active" id="tab-member-urgent">داشبرد فوری / رد شده</button>
+                <button class="tab-btn" id="tab-member-current">تسک‌های جاری هفته</button>
+                <button class="tab-btn" id="tab-member-archive">بایگانی کارهای گذشته</button>
+                <button class="tab-btn" id="tab-member-profile">تغییر رمز عبور</button>
+            </div>
+
+            <!-- منوی تب‌ها مدیران -->
+            <div id="admin-tabs" class="tab-menu hidden">
+                <button class="tab-btn active" id="tab-admin-today">بررسی روز آخر</button>
+                <button class="tab-btn" id="tab-admin-future">تسک‌های آینده</button>
+                <button class="tab-btn" id="tab-admin-expired">اتمام مهلت / تمدید</button>
+                <button class="tab-btn" id="tab-admin-search">جستجوی اعضا</button>
+                <button class="tab-btn" id="tab-admin-manage">مدیریت اعضا و تسک‌ها</button>
+            </div>
+
+            <!-- زون‌های کاربر -->
+            <div id="member-urgent-zone" class="zone card">
+                <h3>تسک‌های تمدیدی، رد شده و امروز شما (جهت انجام روی عنوان تسک کلیک کنید)</h3>
+                <div id="list-urgent"></div>
+            </div>
+
+            <div id="member-current-zone" class="zone card hidden">
+                <h3>تسک‌های جاری این هفته (جهت انجام روی عنوان تسک کلیک کنید)</h3>
+                <div id="list-current"></div>
+            </div>
+            <div id="member-archive-zone" class="zone card hidden">
+                <h3>بایگانی کارهای گذشته و نهایی شده</h3>
+                <div id="list-archive"></div>
+            </div>
+
+            <div id="member-profile-zone" class="zone card hidden">
+                <h3>🔐 تغییر رمز عبور حساب کاربری</h3>
+                <input type="password" id="member-new-pass" placeholder="رمز عبور جدید خود را وارد کنید...">
+                <button id="btn-change-pass" style="background-color: var(--accent-green);">بروزرسانی رمز عبور</button>
+            </div>
+
+            <!-- زون‌های مدیریت -->
+            <div id="admin-today-zone" class="zone card hidden">
+                <h3>کارهای انجام شده جهت بررسی (روز آخر و تایید شده‌ها)</h3>
+                <div id="list-admin-today"></div>
+            </div>
+
+            <div id="admin-future-zone" class="zone card hidden">
+                <h3>مدیریت تسک‌های آینده اعضا</h3>
+                <div id="list-admin-future"></div>
+            </div>
+
+            <div id="admin-expired-zone" class="zone card hidden">
+                <h3>تسک‌های سوخته و تمدید سریع</h3>
+                <div id="list-admin-expired"></div>
+            </div>
+
+            <div id="admin-search-zone" class="zone card hidden">
+                <h3>پرونده و گزارش‌گیری فعالیت اعضا</h3>
+                <input type="text" id="search-input" placeholder="نام کاربر مورد نظر را دقیق وارد کنید...">
+                <div id="search-results"></div>
+            </div>
+
+            <div id="admin-manage-zone" class="zone card hidden">
+                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px;">
+                    <h3>➕ تعریف حساب کاربری جدید</h3>
+                    <input type="text" id="new-user-name" placeholder="نام کاربری جدید">
+                    <input type="password" id="new-user-pass" placeholder="رمز عبور">
+                    <select id="new-user-role">
+                        <option value="member">عضو عادی</option>
+                        <option value="admin">مدیر سیستم</option>
+                    </select>
+                    <button id="btn-create-user" style="background-color: var(--accent-green);">ثبت و ایجاد
+                        حساب</button>
+                </div>
+
+                <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px;">
+                    <h3>➕ تعریف و تخصیص تسک جدید (مولتی تسک متوالی)</h3>
+                    <label style="font-size:12px; color:var(--text-muted);">انتخاب عضو انجمن:</label>
+                    <select id="select-task-user">
+                        <option value="">در حال بارگذاری لیست اعضا...</option>
+                    </select>
+
+                    <label style="font-size:12px; color:var(--text-muted);">عنوان تسک:</label>
+                    <input type="text" id="single-task-title" placeholder="عنوان فعالیت ابلاغی را وارد کنید...">
+
+                    <label style="font-size:12px; color:var(--text-muted);">نوع تسک:</label>
+                    <select id="single-task-type">
+                        <option value="ویدیو">ویدیو</option>
+                        <option value="پادکست">پادکست</option>
+                        <option value="پوستر">پوستر / اینفوگرافیک</option>
+                        <option value="متن">متن</option>
+                    </select>
+
+                    <label style="font-size:12px; color:var(--text-muted);">مهلت نهایی تحویل (به صورت شمسی وارد
+                        کنید):</label>
+                    <input type="text" id="single-task-date" placeholder="مثال: 1405/04/11"
+                        style="direction: ltr; text-align: right;">
+
+                    <button id="btn-create-task" style="margin-top: 10px;">ابلاغ و ثبت تسک (نام کاربر حفظ
+                        می‌شود)</button>
+                </div>
+
+                <div>
+                    <h3>👥 مدیریت رمز عبور و لیست اطلاعات کل اعضا</h3>
+                    <table class="user-manage-table">
+                        <thead>
+                            <tr>
+                                <th>نام کاربری</th>
+                                <th>نقش</th>
+                                <th>رمز عبور فعلی</th>
+                                <th>عملیات ادمین</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-users-table-body">
+                            <tr>
+                                <td colspan="4">در حال دریافت لیست اطلاعات...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="assets/js/index.js"></script>
+</body>
+
+</html>
