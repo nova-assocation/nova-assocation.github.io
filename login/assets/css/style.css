@@ -292,3 +292,345 @@
         user-select: all;
         -webkit-user-select: all;
     }
+
+/* =========================================================
+   🌌 ۱. پس‌زمینه زنده نجومی، ستاره‌ای و سحابی کل سایت
+   ========================================================= */
+body {
+    background-color: #05070f !important;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* لایه سحابی و عمق کیهانی متحرک */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.22) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(56, 189, 248, 0.18) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.12) 0%, transparent 60%);
+    z-index: -2;
+    pointer-events: none;
+    animation: nebulaPulse 10s ease-in-out infinite alternate;
+}
+
+/* لایه میدان ستاره‌ای پوینده (Starfield) */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: 
+        radial-gradient(1.5px 1.5px at 40px 60px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 150px 220px, #e879f9, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 300px 80px, #38bdf8, rgba(0,0,0,0)),
+        radial-gradient(2.5px 2.5px at 420px 350px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 600px 180px, #a855f7, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 750px 480px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 900px 250px, #38bdf8, rgba(0,0,0,0));
+    background-size: 800px 600px;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+@keyframes nebulaPulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.15); opacity: 1; }
+}
+
+
+/* =========================================================
+   ⏱️ ۲. استایل کیهانی ساعت زنده و وضعیت اتصال
+   ========================================================= */
+.clock-box {
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.85) 0%, rgba(30, 27, 60, 0.85) 100%);
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    color: #e2e8f0;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(168, 85, 247, 0.1);
+    backdrop-filter: blur(8px);
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+.status-box {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(20, 30, 50, 0.85) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    color: #38bdf8;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   ✨ ۳. تم نجومی و فضایی ویژه بخش ورود (auth-panel)
+   ========================================================= */
+#auth-panel {
+    background: linear-gradient(135deg, #0b0d19 0%, #151833 50%, #1a103c 100%);
+    border: 1px solid rgba(138, 92, 246, 0.4);
+    box-shadow: 0 0 35px rgba(124, 58, 237, 0.25), inset 0 0 15px rgba(168, 85, 247, 0.15);
+    border-radius: 16px;
+    padding: 30px 25px;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+#auth-panel::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #a855f7, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 40px, #38bdf8, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 230px 190px, #e879f9, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 250px 250px;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+#auth-panel h2 {
+    color: #f3e8ff;
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 25px;
+    text-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+#auth-panel h2::before {
+    content: '🌌 ';
+    font-size: 20px;
+}
+
+#auth-panel input {
+    background-color: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #f1f5f9;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 14px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#auth-panel input:focus {
+    border-color: #c084fc;
+    box-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
+    background-color: rgba(15, 23, 42, 0.9);
+}
+
+#auth-panel button#btn-login {
+    background: linear-gradient(90deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    background-size: 200% auto;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 14px;
+    font-size: 16px;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+    transition: 0.4s ease;
+    margin-top: 5px;
+}
+
+#auth-panel button#btn-login:hover {
+    background-position: right center;
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   📱 ۴. پوشش ریز به ریز تمام جزئیات ریسپانسیو (Responsive Rules)
+   ========================================================= */
+
+/* بهبود اسکرول منوی تب‌ها در همه سیستم‌ها */
+.tab-menu {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+.tab-btn {
+    flex-shrink: 0;
+}
+
+/* تنظیمات ریسپانسیو مخصوص موبایل و تبلت‌های کوچک */
+@media screen and (max-width: 600px) {
+    body {
+        padding: 8px 6px;
+    }
+
+    .container {
+        padding-bottom: 25px;
+        width: 100%;
+    }
+
+    .card {
+        padding: 14px 12px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+    }
+
+    /* تایپوگرافی موبایل */
+    h2 { font-size: 17px; }
+    h3 { font-size: 15px; margin-bottom: 12px; }
+    h4 { font-size: 13.5px; line-height: 1.5; }
+
+    /* ساعت و باکس ارتباط */
+    .clock-box {
+        font-size: 12px;
+        padding: 10px 8px;
+    }
+
+    .status-box {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    /* هدر داشبورد (خوش‌آمدگویی و دکمه خروج) */
+    #main-dashboard > .card:first-child {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch !important;
+        text-align: center;
+    }
+
+    #main-dashboard > .card:first-child #btn-logout {
+        width: 100% !important;
+        padding: 8px !important;
+    }
+
+    /* دکمه‌ها و فرم‌ها */
+    input, textarea, select, button {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .btn-small {
+        width: 100% !important;
+        padding: 8px !important;
+        text-align: center;
+    }
+
+    /* بخش تمدید مهلت در کارت ادمین */
+    [id^="admin-card-"] div[style*="border-top"] {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    [id^="admin-card-"] div[style*="border-top"] input {
+        width: 100% !important;
+    }
+
+    [id^="admin-card-"] div[style*="border-top"] button {
+        width: 100% !important;
+    }
+
+    /* باکس ویرایش تسک توسط ادمین */
+    .edit-task-box div[style*="display:flex"] {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .edit-task-box div[style*="display:flex"] button {
+        width: 100% !important;
+    }
+
+    /* کپشن و متون قابل کپی */
+    .selectable-caption {
+        font-size: 12px;
+        padding: 8px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .msg-box, .warn-box {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+
+    /* تبدیل هوشمند جدول مدیریت کاربران به کارت‌های مجزا در موبایل */
+    .user-manage-table, 
+    .user-manage-table tbody, 
+    .user-manage-table tr, 
+    .user-manage-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .user-manage-table thead {
+        display: none; /* مخفی کردن هدر سنگین جدول */
+    }
+
+    .user-manage-table tr {
+        margin-bottom: 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        background: rgba(22, 27, 34, 0.9);
+        padding: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .user-manage-table td {
+        border: none;
+        border-bottom: 1px solid rgba(48, 54, 61, 0.6);
+        text-align: right;
+        padding: 8px 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .user-manage-table td:last-child {
+        border-bottom: none;
+        padding-top: 10px;
+    }
+
+    .user-manage-table td button {
+        width: 100% !important;
+    }
+}
