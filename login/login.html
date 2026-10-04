@@ -21,9 +21,33 @@
         <!-- بخش احراز هویت -->
         <div id="auth-panel" class="card">
             <h2>ورود به سامانه NOVA</h2>
-            <input type="text" id="login-username" placeholder="نام کاربری">
+            
+            <!-- ورودی نام کاربری یا ایمیل -->
+            <input type="text" id="login-username" placeholder="نام کاربری یا ایمیل">
+            
+            <!-- ورودی رمز عبور -->
             <input type="password" id="login-password" placeholder="رمز عبور">
-            <button id="btn-login">ورود به پنل</button>
+            
+            <!-- دکمه ورود با رمز -->
+            <button id="btn-login" onclick="handlePasswordLogin()">ورود به پنل</button>
+
+            <div style="margin: 15px 0; border-top: 1px solid rgba(255,255,255,0.1); position: relative; text-align: center;">
+                <br>
+                <span style="background: inherit; padding: 0 10px; font-size: 12px; color: #888; position: relative; top: -10px;">یا</span>
+            </div>
+
+            <!-- دکمه دریافت کد یک‌بارمصرف -->
+            <button id="btn-send-otp" onclick="handleSendOTP()" style="background-color: transparent; border: 1px solid var(--accent-color, #00d2ff); color: #fff;">
+                🔑 دریافت کد یک‌بارمصرف به ایمیل
+            </button>
+
+            <!-- بخش ورود کد OTP (در ابتدا مخفی است) -->
+            <div id="otp-verify-section" style="display: none; margin-top: 15px;">
+                <input type="text" id="otp-code-input" placeholder="کد ۶ رقمی را وارد کنید" style="text-align: center; letter-spacing: 4px;">
+                <button id="btn-verify-otp" onclick="handleVerifyOTP()" style="background-color: #28a745; color: #fff;">
+                    تأیید کد و ورود
+                </button>
+            </div>
         </div>
 
         <!-- داشبورد اصلی -->
