@@ -245,6 +245,67 @@ async function changeMemberPassword() {
     }
 }
 
+// تابع کمکی برای تشخیص ایمیل یا نام کاربری
+function getFormattedEmail() {
+    const rawInput = document.getElementById('login-username').value.trim();
+    if (!rawInput) return null;
+    return rawInput.includes('@') ? rawInput : `${rawInput}@robo.local`;
+}
+
+// ۲. درخواست ارسال کد OTP به ایمیل
+async function handleSendOTP() {
+    const email = getFormattedEmail();
+    if (!email) return alert('لطفاً ابتدا نام کاربری یا ایمیل خود را در کادر بالا وارد کنید.');
+
+    try {
+        const { error } = await db.auth.signInWithOtp({
+            email: email,
+            options: {
+                shouldCreateUser: false // عدم ثبت‌نام کاربر جدید در صورت اشتباه بودن ایمیل
+            }
+        });
+
+        if (error) {
+            if (error.message.includes('Signups not allowed') || error.message.includes('User not found')) {
+                alert('❌ این کاربر یا ایمیل در سامانه ثبت نشده است.');
+            } else {
+                alert('خطا در ارسال کد: ' + error.message);
+            }
+            return;
+        }
+
+        alert('✅ کد تأیید ۶ رقمی به ایمیل شما ارسال شد.');
+        document.getElementById('otp-verify-section').style.display = 'block';
+
+    } catch (err) {
+        alert('خطا در اتصال: ' + err.message);
+    }
+}
+
+// ۳. بررسی و تأیید کد ۶ رقمی
+async function handleVerifyOTP() {
+    const email = getFormattedEmail();
+    const token = document.getElementById('otp-code-input').value.trim();
+
+    if (!token) return alert('لطفاً کد ۶ رقمی را وارد کنید.');
+
+    try {
+        const { data, error } = await db.auth.verifyOtp({
+            email: email,
+            token: token,
+            type: 'email'
+        });
+
+        if (error) throw error;
+
+        alert('✅ ورود موفقیت‌آمیز بود.');
+        location.reload();
+
+    } catch (err) {
+        alert('❌ کد وارد شده اشتباه یا منقضی شده است.');
+    }
+}
+
 async function loadUsersManagementSection() {
     const select = document.getElementById('select-task-user');
     const tableBody = document.getElementById('admin-users-table-body');
@@ -310,7 +371,7 @@ async function createNewUser() {
     const role = document.getElementById('new-user-role').value;
     if (!usernameInput || !password) return alert('نام کاربری و رمز عبور را مشخص کنید.');
 
-    const email = `${usernameInput}@nova.local`;
+    const email = usernameInput.includes('@') ? usernameInput : `${usernameInput}@nova.local`;;
 
     try {
         // ارسال مشخصات به سیستم Auth (تریگر دیتابیس خودکار پروفایل را می‌سازد)
