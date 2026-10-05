@@ -36,10 +36,7 @@ function updateLiveClock() {
     const now = new Date();
     const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', calendar: 'persian' };
     const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-    const clockEl = document.getElementById('live-clock');
-    if (clockEl) {
-        clockEl.innerText = `⏱️ امروز: ${new Intl.DateTimeFormat('fa-IR', optionsDate).format(now)} | ساعت: ${new Intl.DateTimeFormat('fa-IR', optionsTime).format(now)}`;
-    }
+    document.getElementById('live-clock').innerText = `⏱️ امروز: ${new Intl.DateTimeFormat('fa-IR', optionsDate).format(now)} | ساعت: ${new Intl.DateTimeFormat('fa-IR', optionsTime).format(now)}`;
 }
 setInterval(updateLiveClock, 1000);
 
@@ -49,37 +46,32 @@ setTimeout(async () => {
     if (typeof window.supabase === 'undefined') { return; }
     try {
         db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // تست اتصال با جدول profiles
         const { error } = await db.from('profiles').select('id').limit(1);
-        if (!error && statusBox) { 
-            statusBox.style.color = 'var(--accent-green)'; 
-            statusBox.innerText = '🟢 اتصال به سامانه مرکزی برقرار است'; 
+        if (!error && statusBox) {
+            statusBox.style.color = 'var(--accent-green)';
+            statusBox.innerText = '🟢 اتصال به سامانه مرکزی برقرار است';
         }
     } catch (err) { }
 
-    document.getElementById('btn-login')?.addEventListener('click', handleLogin);
-    document.getElementById('btn-logout')?.addEventListener('click', handleLogout);
-    document.getElementById('btn-create-user')?.addEventListener('click', createNewUser);
-    document.getElementById('btn-create-task')?.addEventListener('click', createNewTask);
-    document.getElementById('btn-change-pass')?.addEventListener('click', changeMemberPassword);
-    document.getElementById('search-input')?.addEventListener('input', searchUserActivity);
+    document.getElementById('btn-login').addEventListener('click', handleLogin);
+    document.getElementById('btn-logout').addEventListener('click', handleLogout);
+    document.getElementById('btn-create-user').addEventListener('click', createNewUser);
+    document.getElementById('btn-create-task').addEventListener('click', createNewTask);
+    document.getElementById('btn-change-pass').addEventListener('click', changeMemberPassword);
+    document.getElementById('search-input').addEventListener('input', searchUserActivity);
 
-    document.getElementById('tab-member-urgent')?.addEventListener('click', () => switchTab('member-urgent'));
-    document.getElementById('tab-member-current')?.addEventListener('click', () => switchTab('member-current'));
-    document.getElementById('tab-member-archive')?.addEventListener('click', () => switchTab('member-archive'));
-    document.getElementById('tab-member-profile')?.addEventListener('click', () => switchTab('member-profile'));
+    document.getElementById('tab-member-urgent').addEventListener('click', () => switchTab('member-urgent'));
+    document.getElementById('tab-member-current').addEventListener('click', () => switchTab('member-current'));
+    document.getElementById('tab-member-archive').addEventListener('click', () => switchTab('member-archive'));
+    document.getElementById('tab-member-profile').addEventListener('click', () => switchTab('member-profile'));
 
-    document.getElementById('tab-admin-today')?.addEventListener('click', () => switchTab('admin-today'));
-    document.getElementById('tab-admin-future')?.addEventListener('click', () => switchTab('admin-future'));
-    document.getElementById('tab-admin-expired')?.addEventListener('click', () => switchTab('admin-expired'));
-    document.getElementById('tab-admin-search')?.addEventListener('click', () => switchTab('admin-search'));
-    document.getElementById('tab-admin-manage')?.addEventListener('click', () => { switchTab('admin-manage'); loadUsersManagementSection(); });
+    document.getElementById('tab-admin-today').addEventListener('click', () => switchTab('admin-today'));
+    document.getElementById('tab-admin-future').addEventListener('click', () => switchTab('admin-future'));
+    document.getElementById('tab-admin-expired').addEventListener('click', () => switchTab('admin-expired'));
+    document.getElementById('tab-admin-search').addEventListener('click', () => switchTab('admin-search'));
+    document.getElementById('tab-admin-manage').addEventListener('click', () => { switchTab('admin-manage'); loadUsersManagementSection(); });
 
-    setTimeout(() => {
-        const todayField = document.getElementById('single-task-date');
-        if (todayField) todayField.value = convertToShamsiString(new Date());
-    }, 500);
-
-    // بررسی نشست فعال کاربر هنگام باز شدن صفحه
     try {
         const { data: { session } } = await db.auth.getSession();
         if (session && session.user) {
@@ -106,8 +98,13 @@ setTimeout(async () => {
                 }
             }
         }
-    } catch (e) { }
-
+    } catch (e) {
+        console.log("خطا در بازیابی نشست:", e);
+    }
+    setTimeout(() => {
+        const todayField = document.getElementById('single-task-date');
+        if (todayField) todayField.value = convertToShamsiString(new Date());
+    }, 500);
 }, 1000);
 
 window.checkAndUploadFile = async function (fileInputId, targetInputId, btnId, taskId) {
@@ -127,7 +124,7 @@ window.checkAndUploadFile = async function (fileInputId, targetInputId, btnId, t
     }
 
     const fileExt = file.name.split('.').pop();
-    const fileName = `${currentUser ? currentUser.id : 'anon'}/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+    const fileName = `${currentUser.id}/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
     const filePath = `${fileName}`;
 
     btn.innerText = '🔄 در حال آپلود فایل...';
@@ -140,9 +137,10 @@ window.checkAndUploadFile = async function (fileInputId, targetInputId, btnId, t
         });
         if (error) throw error;
 
+        // ایجاد Signed URL امن با اعتبار ۱ ساله (برای دانلود فایل‌های خصوصی)
         const { data: signedData, error: signedError } = await db.storage
             .from('robo-files')
-            .createSignedUrl(filePath, 60 * 60 * 24 * 365);
+            .createSignedUrl(filePath, 60 * 60 * 24 * 365); // ۶۰ ثانیه * ۶۰ دقیقه * ۲۴ ساعت * ۳۶۵ روز
 
         if (signedError) throw signedError;
 
@@ -160,26 +158,37 @@ window.checkAndUploadFile = async function (fileInputId, targetInputId, btnId, t
 async function handleLogin() {
     const usernameInput = document.getElementById('login-username').value.trim().toLowerCase();
     const pass = document.getElementById('login-password').value;
+
     if (!usernameInput || !pass) return alert('لطفاً اطلاعات را کامل وارد کنید.');
 
-    const email = `${usernameInput}@robo.local`;
+    // ساخت ایمیل معتبر (جلوگیری از تکرار @nova.local)
+    const email = usernameInput.includes('@') ? usernameInput : `${usernameInput}@nova.local`;
 
     try {
+        // ۱. احراز هویت از طریق Supabase Auth
         const { data: authData, error: authError } = await db.auth.signInWithPassword({
             email: email,
             password: pass
         });
 
-        if (authError) return alert('نام کاربری یا رمز عبور اشتباه است.');
+        if (authError) {
+            console.error("خطای Auth:", authError.message);
+            return alert('نام کاربری یا رمز عبور اشتباه است.');
+        }
 
         const authUser = authData.user;
+
+        // ۲. دریافت نقش کاربر از جدول profiles
         const { data: profileData, error: profileError } = await db
             .from('profiles')
             .select('role, username')
             .eq('id', authUser.id)
             .single();
 
-        if (profileError || !profileData) return alert('خطا در دریافت مشخصات کاربر.');
+        if (profileError || !profileData) {
+            console.error("خطای پروفایل:", profileError);
+            return alert('حساب کاربری یافت شد اما پروفایل (نقش) برای آن ثبت نشده است.');
+        }
 
         currentUser = {
             id: authUser.id,
@@ -188,12 +197,10 @@ async function handleLogin() {
             email: authUser.email
         };
 
+        // بروزرسانی رابط کاربری
         document.getElementById('auth-panel').classList.add('hidden');
         document.getElementById('main-dashboard').classList.remove('hidden');
         document.getElementById('user-welcome').innerText = `${currentUser.username} (${currentUser.role === 'admin' ? 'مدیر' : 'عضو'})`;
-
-        const { data: allUsers } = await db.from('profiles').select('id, username, role');
-        cachedUsersList = allUsers || [];
 
         if (currentUser.role === 'admin') {
             document.getElementById('admin-tabs').classList.remove('hidden');
@@ -205,10 +212,10 @@ async function handleLogin() {
             loadMemberData();
         }
     } catch (e) {
-        alert('خطای غیرمنتظره در ورود: ' + e.message);
+        console.error("خطای غیرمنتظره:", e);
+        alert('خطای غیرمنتظره در فرآیند ورود: ' + e.message);
     }
 }
-
 async function handleLogout() {
     await db.auth.signOut();
     currentUser = null;
@@ -227,48 +234,125 @@ function switchTab(tabId) {
 
 async function changeMemberPassword() {
     const newPass = document.getElementById('member-new-pass').value;
-    if (!newPass || newPass.length < 6) return alert('رمز عبور باید حداقل ۶ کاراکتر باشد.');
+    if (!newPass || newPass.length < 6) return alert('رمز عبور جدید باید حداقل ۶ کاراکتر باشد.');
+
     const { error } = await db.auth.updateUser({ password: newPass });
-    if (!error) { 
-        alert('رمز عبور با موفقیت بروزرسانی شد.'); 
-        document.getElementById('member-new-pass').value = ''; 
+    if (!error) {
+        alert('رمز عبور با موفقیت بروزرسانی شد.');
+        document.getElementById('member-new-pass').value = '';
     } else {
         alert('خطا در تغییر رمز: ' + error.message);
+    }
+}
+
+// تابع کمکی برای تشخیص ایمیل یا نام کاربری
+function getFormattedEmail() {
+    const rawInput = document.getElementById('login-username').value.trim();
+    if (!rawInput) return null;
+    return rawInput.includes('@') ? rawInput : `${rawInput}@robo.local`;
+}
+
+// ۲. درخواست ارسال کد OTP به ایمیل
+async function handleSendOTP() {
+    const email = getFormattedEmail();
+    if (!email) return alert('لطفاً ابتدا نام کاربری یا ایمیل خود را در کادر بالا وارد کنید.');
+
+    try {
+        const { error } = await db.auth.signInWithOtp({
+            email: email,
+            options: {
+                shouldCreateUser: false // عدم ثبت‌نام کاربر جدید در صورت اشتباه بودن ایمیل
+            }
+        });
+
+        if (error) {
+            if (error.message.includes('Signups not allowed') || error.message.includes('User not found')) {
+                alert('❌ این کاربر یا ایمیل در سامانه ثبت نشده است.');
+            } else {
+                alert('خطا در ارسال کد: ' + error.message);
+            }
+            return;
+        }
+
+        alert('✅ کد تأیید ۶ رقمی به ایمیل شما ارسال شد.');
+        document.getElementById('otp-verify-section').style.display = 'block';
+
+    } catch (err) {
+        alert('خطا در اتصال: ' + err.message);
+    }
+}
+
+// ۳. بررسی و تأیید کد ۶ رقمی
+async function handleVerifyOTP() {
+    const email = getFormattedEmail();
+    const token = document.getElementById('otp-code-input').value.trim();
+
+    if (!token) return alert('لطفاً کد ۶ رقمی را وارد کنید.');
+
+    try {
+        const { data, error } = await db.auth.verifyOtp({
+            email: email,
+            token: token,
+            type: 'email'
+        });
+
+        if (error) throw error;
+
+        alert('✅ ورود موفقیت‌آمیز بود.');
+        location.reload();
+
+    } catch (err) {
+        alert('❌ کد وارد شده اشتباه یا منقضی شده است.');
     }
 }
 
 async function loadUsersManagementSection() {
     const select = document.getElementById('select-task-user');
     const tableBody = document.getElementById('admin-users-table-body');
-    const lastSelectedUser = select.value;
+    const lastSelectedUser = select ? select.value : '';
 
-    const { data: users } = await db.from('profiles').select('id, username, role');
+    const { data: users, error } = await db.from('profiles').select('id, username, role, job_title');
+    if (error) {
+        console.error("خطا در دریافت لیست کاربران:", error);
+        return;
+    }
 
-    select.innerHTML = '<option value="">انتخاب عضو انجمن...</option>';
-    tableBody.innerHTML = '';
+    cachedUsersList = users || [];
 
-    users?.forEach(u => {
-        select.innerHTML += `<option value="${u.id}">${u.username}</option>`;
-        tableBody.innerHTML += `
-            <tr>
-                <td><strong>${u.username}</strong></td>
-                <td>${u.role === 'admin' ? '💼 مدیر ادمین' : '👤 عضو عادی'}</td>
-                <td><code style="background:#222; padding:3px 6px; border-radius:4px; color:var(--accent-blue);">محفوظ در Auth</code></td>
-                <td><button class="btn-small" style="background-color: var(--accent-blue); padding:4px 8px;" onclick="resetUserPasswordPrompt('${u.id}', '${u.username}')">✏️ ویرایش رمز</button></td>
-            </tr>
-        `;
-    });
+    if (select) {
+        select.innerHTML = '<option value="">انتخاب عضو انجمن...</option>';
+        users?.forEach(u => {
+            select.innerHTML += `<option value="${u.id}">${u.username}</option>`;
+        });
+        if (lastSelectedUser) select.value = lastSelectedUser;
+    }
 
-    if (lastSelectedUser) {
-        select.value = lastSelectedUser;
+    if (tableBody) {
+        tableBody.innerHTML = '';
+        users?.forEach(u => {
+            tableBody.innerHTML += `
+                <tr>
+                    <td><strong>${u.username}</strong></td>
+                    <td>${u.role === 'admin' ? '💼 مدیر ادمین' : '👤 عضو عادی'}</td>
+                    <td>
+                        <span id="job-text-${u.id}">${u.job_title || 'تعریف نشده'}</span>
+                        <button class="btn-small" style="background:#222; padding:3px 6px; border-radius:4px; color:var(--accent-blue);" onclick="editMemberJob('${u.id}', '${u.job_title || ''}')">✏️</button>
+                    </td>
+                    <td><button class="btn-small" style="background-color: var(--accent-blue); padding:4px 8px;" onclick="resetUserPasswordPrompt('${u.id}', '${u.username}')">✏️ تغییر رمز عبور</button></td>
+                </tr>
+            `;
+        });
     }
 }
+
+// برای هم‌خوانی با فراخوانی‌های قدیمی
+window.loadUsersToSelect = loadUsersManagementSection;
 
 window.resetUserPasswordPrompt = async function (userId, username) {
     const newPass = prompt(`رمز عبور جدید را برای کاربر "${username}" وارد کنید (حداقل ۶ کاراکتر):`);
     if (!newPass) return;
-    if (newPass.length < 6) return alert('رمز عبور جدید باید حداقل ۶ کاراکتر باشد.');
-    
+    if (newPass.length < 6) return alert('رمز عبور باید حداقل ۶ کاراکتر باشد.');
+
     try {
         const { data, error } = await db.functions.invoke('admin-change-password', {
             body: { userId: userId, newPassword: newPass }
@@ -280,7 +364,7 @@ window.resetUserPasswordPrompt = async function (userId, username) {
             alert(`✅ رمز عبور کاربر "${username}" با موفقیت تغییر یافت.`);
         }
     } catch (err) {
-        alert('خطا در ارتباط: ' + err.message);
+        alert('خطای اتصال: ' + err.message);
     }
 }
 
@@ -288,42 +372,64 @@ async function createNewUser() {
     const usernameInput = document.getElementById('new-user-name').value.trim().toLowerCase();
     const password = document.getElementById('new-user-pass').value;
     const role = document.getElementById('new-user-role').value;
-    if (!usernameInput || !password) return alert('نام کاربری و رمز عبور را مشخص کنید.');
+    
+    // دریافت مقدار فیلد مسئولیت/عنوان شغلی
+    const jobTitleInput = document.getElementById('new-user-job');
+    const jobTitle = jobTitleInput ? jobTitleInput.value.trim() : '';
 
-    const email = `${usernameInput}@robo.local`;
+    // ۱. بررسی و اعتبارسنجی ورودی‌ها (اگر خالی بود ارور می‌دهد)
+    if (!usernameInput || !password) {
+        return alert('نام کاربری و رمز عبور را مشخص کنید.');
+    }
+
+    if (!jobTitle) {
+        return alert('لطفاً عنوان شغلی / مسئولیت کاربر را وارد کنید.');
+    }
+
+    const email = usernameInput.includes('@') ? usernameInput : `${usernameInput}@nova.local`;
 
     try {
+        // ۲. ارسال مشخصات به سیستم Auth
         const { data: authData, error: authError } = await db.auth.signUp({
             email: email,
             password: password,
             options: {
-                data: { username: usernameInput, role: role }
+                data: { username: usernameInput, role: role, job_title: jobTitle }
             }
         });
 
         if (authError) return alert('خطا در ایجاد کاربر: ' + authError.message);
 
-        const newUserId = authData.user.id;
+        // ۳. ثبت مستقیم در جدول profiles
+        if (authData && authData.user) {
+            const { error: profileError } = await db
+                .from('profiles')
+                .upsert({
+                    id: authData.user.id,
+                    username: usernameInput,
+                    role: role,
+                    job_title: jobTitle
+                });
 
-        const { error: profileError } = await db.from('profiles').insert({
-            id: newUserId,
-            username: usernameInput,
-            role: role
-        });
-
-        if (!profileError) {
-            alert(`حساب "${usernameInput}" با موفقیت ایجاد شد.`);
-            document.getElementById('new-user-name').value = '';
-            document.getElementById('new-user-pass').value = '';
-            loadUsersManagementSection();
-        } else {
-            alert('خطا در ایجاد پروفایل: ' + profileError.message);
+            if (profileError) {
+                console.error('خطا در ثبت جدول پروفایل:', profileError);
+            }
         }
+
+        alert(`حساب "${usernameInput}" با موفقیت ایجاد شد.`);
+
+        // پاکسازی اینپوت‌ها پس از ثبت موفق
+        document.getElementById('new-user-name').value = '';
+        document.getElementById('new-user-pass').value = '';
+        if (jobTitleInput) jobTitleInput.value = '';
+
+        // بازخوانی لیست کاربران
+        loadUsersManagementSection();
     } catch (e) {
         alert('خطای غیرمنتظره: ' + e.message);
     }
 }
-
+// تغییر متد به مولتی تسک متوالی (چند تسک برای یک نفر بدون ریست شدن منو)
 async function createNewTask() {
     const userId = document.getElementById('select-task-user').value;
     const title = document.getElementById('single-task-title').value.trim();
@@ -331,11 +437,11 @@ async function createNewTask() {
     const shamsiDateValue = document.getElementById('single-task-date').value.trim();
 
     if (!userId || !title || !shamsiDateValue) {
-        return alert('⚠️️ تکمیل تمامی فیلدها اجباری است.');
+        return alert('⚠️ تکمیل تمامی فیلدها اجباری است.');
     }
 
     const { error } = await db.from('robo_tasks').insert({
-        user_id: userId,
+        user_id: userId, // این شناسه اکنون همان UUID کاربر از جدول profiles است
         title: title,
         task_type: taskType,
         due_date: shamsiDateValue,
@@ -343,7 +449,7 @@ async function createNewTask() {
     });
 
     if (!error) {
-        alert('✅ تسک با موفقیت ثبت شد. می‌توانید تسک بعدی را برای همین شخص بنویسید.');
+        alert('✅ تسک با موفقیت ثبت شد.');
         document.getElementById('single-task-title').value = '';
         document.getElementById('single-task-date').value = convertToShamsiString(new Date());
         if (currentUser.role === 'admin') fetchAdminDataFromServer();
@@ -360,6 +466,7 @@ function isPastDeadline(shamsiDateStr) {
     } catch (e) { return false; }
 }
 
+// تابع کمکی برای باز و بسته کردن پنل تسک اعضا (آکاردئون)
 window.toggleTaskFold = function (id) {
     const el = document.getElementById(`fold-body-${id}`);
     if (el) el.classList.toggle('hidden');
@@ -384,6 +491,7 @@ async function loadMemberData() {
                 ${task.has_blue_dot ? '<span class="dot dot-blue"></span>' : ''}
                 ${task.has_red_dot ? '<span class="dot dot-red"></span>' : ''}
                 
+                <!-- هدر قابل کلیک برای باز شدن بخش انجام تسک -->
                 <div class="task-header-click" onclick="toggleTaskFold('${task.id}')">
                     <h4><span class="task-badge">${typeLabel}</span> ${task.title} <i class="fa fa-chevron-down" style="font-size:11px; margin-right:5px; color:var(--text-muted);"></i></h4>
                     <div style="font-size:13px; color:var(--text-muted);">📅 مهلت نهایی (شمسی): <strong style="color:#fff;">${task.due_date}</strong> | وضعیت: <span style="color:var(--accent-blue);">${farsiStatus}</span></div>
@@ -393,6 +501,7 @@ async function loadMemberData() {
             itemHtml += `<div class="msg-box">⚠️ علت رد فعالیت توسط ادمین: ${task.admin_comment}</div>`;
         }
 
+        // باکس محتوایی که با کلیک روی تسک باز می‌شود
         itemHtml += `<div id="fold-body-${task.id}" class="task-body-fold hidden">`;
 
         if ((task.status === 'not_started' || task.status === 'rejected') && !isOverdue) {
@@ -447,9 +556,42 @@ window.submitTask = async function (taskId) {
 }
 
 async function fetchAdminDataFromServer() {
-    const { data: tasks } = await db.from('robo_tasks').select('*, profiles(username)').order('due_date', { ascending: true });
-    allAdminTasks = tasks || [];
-    loadAdminData();
+    try {
+        // ۱. دریافت تمامی تسک‌ها
+        const { data: tasks, error: tasksError } = await db
+            .from('robo_tasks')
+            .select('*')
+            .order('due_date', { ascending: true });
+
+        if (tasksError) throw tasksError;
+
+        // ۲. دریافت تمامی پروفایل‌ها برای تشخیص نام کاربران
+        const { data: profiles, error: profilesError } = await db
+            .from('profiles')
+            .select('id, username');
+
+        if (profilesError) throw profilesError;
+
+        // ایجاد یک مپ سریع از ID به نام کاربر
+        const profileMap = {};
+        profiles?.forEach(p => {
+            profileMap[p.id] = p.username;
+        });
+
+        // ۳. ترکیب اطلاعات تسک با نام کاربر
+        allAdminTasks = (tasks || []).map(task => ({
+            ...task,
+            profiles: {
+                username: profileMap[task.user_id] || 'ناشناس'
+            }
+        }));
+
+        // ۴. بروزرسانی رابط کاربری
+        loadAdminData();
+
+    } catch (error) {
+        console.error("خطا در دریافت تسک‌های ادمین:", error.message || error);
+    }
 }
 
 function loadAdminData() {
@@ -458,6 +600,8 @@ function loadAdminData() {
     const listToday = document.getElementById('list-admin-today');
     const listFuture = document.getElementById('list-admin-future');
     const listExpired = document.getElementById('list-admin-expired');
+
+    if (!listToday || !listFuture || !listExpired) return;
 
     listToday.innerHTML = ''; listFuture.innerHTML = ''; listExpired.innerHTML = '';
 
@@ -540,7 +684,7 @@ function loadAdminData() {
 
 window.toggleEditForm = function (taskId) {
     const box = document.getElementById(`edit-box-${taskId}`);
-    if (box) box.classList.toggle('hidden');
+    box.classList.toggle('hidden');
 }
 
 window.saveEditedTask = async function (taskId) {
@@ -600,9 +744,12 @@ window.deleteTaskFromServer = async function (taskId) {
 async function searchUserActivity() {
     const term = document.getElementById('search-input').value.trim().toLowerCase();
     const resultsDiv = document.getElementById('search-results');
+    if (!resultsDiv) return;
     if (!term) { resultsDiv.innerHTML = ''; return; }
+
     const { data: user } = await db.from('profiles').select('id').eq('username', term).single();
     if (!user) { resultsDiv.innerHTML = 'کاربری با این نام پیدا نشد.'; return; }
+
     const { data: tasks } = await db.from('robo_tasks').select('*').eq('user_id', user.id).order('due_date', { ascending: true });
     resultsDiv.innerHTML = `<h4>تعداد فعالیت‌ها: ${tasks?.length || 0}</h4>`;
     tasks?.forEach(t => {
@@ -610,3 +757,22 @@ async function searchUserActivity() {
         resultsDiv.innerHTML += `<div style="padding:8px; border-bottom:1px solid #333;">• ${t.title} [نوع: ${t.task_type || 'ویدیو'}] [تاریخ: ${t.due_date}] [وضعیت: ${farsiStatus}]</div>`;
     });
 }
+
+window.editMemberJob = async function (userId, currentJob) {
+    const newJob = prompt('عنوان شغلی / مسئولیت جدید کاربر را وارد کنید:', currentJob);
+    if (newJob === null || newJob.trim() === '') return;
+
+    // آپدیت دیتابیس
+    const { error } = await db
+        .from('profiles')
+        .update({ job_title: newJob.trim() })
+        .eq('id', userId);
+
+    if (error) {
+        alert('خطا در ذخیره در دیتابیس: ' + error.message);
+    } else {
+        alert('مسئولیت کاربر با موفقیت در دیتابیس ذخیره شد.');
+        // بازخوانی مجدد جدول از دیتابیس برای اطمینان از ثبت
+        loadUsersManagementSection();
+    }
+};
