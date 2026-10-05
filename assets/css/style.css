@@ -18,7 +18,7 @@
     --hero-title-deg1: #fff;
     --hero-title-deg2: #b9d4ff;
     --hero-title-deg3: #8fefe0;
-    
+
     /* متغیرهای جدید برای تم تیره */
     --txt-white: #ffffff;
     --txt-tag: #9fd0ff;
@@ -116,7 +116,8 @@ body {
     align-items: center;
     justify-content: center;
     outline: none;
-    flex-shrink: 0; /* جلوگیری از تغییر سایز در فلکس هدر */
+    flex-shrink: 0;
+    /* جلوگیری از تغییر سایز در فلکس هدر */
     user-select: none;
     -webkit-tap-highlight-color: transparent;
 }
@@ -146,7 +147,7 @@ body {
     color: var(--txt-white, #ffffff);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
-    
+
     /* حالت پیش‌فرض (تاریک/دارک) - دکمه سمت راست/چپ قرار می‌گیرد */
     transform: translateX(0);
 }
@@ -316,14 +317,18 @@ nav a:hover {
 .logins {
     display: flex;
     align-items: center;
-    gap: 8px; /* فاصله بین دکمه‌ها */
+    gap: 8px;
+    /* فاصله بین دکمه‌ها */
 }
 
 .logins a {
-    flex-shrink: 0;         /* تغییر نیافتن سایز در فلکس */
-    white-space: nowrap;     /* نرفتن متن به خط بعدی */
+    flex-shrink: 0;
+    /* تغییر نیافتن سایز در فلکس */
+    white-space: nowrap;
+    /* نرفتن متن به خط بعدی */
     padding: 8px 16px;
-    border-radius: 8px;      /* شعاع گوشه‌ها جهت جلوگیری از دایره شدن */
+    border-radius: 8px;
+    /* شعاع گوشه‌ها جهت جلوگیری از دایره شدن */
     text-align: center;
 }
 
@@ -495,7 +500,7 @@ nav a:hover {
     margin-top: .8rem !important
 }
 
-.event-btn{
+.event-btn {
     align-self: center;
     margin-top: .4rem;
 }
@@ -592,7 +597,7 @@ nav a:hover {
     transform: scale(1.08)
 }
 
-.btn-gallery{
+.btn-gallery {
     width: 100%;
     margin-bottom: .6rem;
 }
@@ -606,7 +611,7 @@ nav a:hover {
     background: linear-gradient(transparent, rgba(4, 5, 16, .9))
 }
 
-.gal img{
+.gal img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -621,16 +626,19 @@ nav a:hover {
 .team {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem; /* ایجاد فاصله عمودی بین کارت بالا و کارت‌های پایین */
+    gap: 1.25rem;
+    /* ایجاد فاصله عمودی بین کارت بالا و کارت‌های پایین */
 }
 
 .team-member {
     display: flex;
-    gap: 1.25rem; /* ایجاد فاصله افقی بین دو کارت پایین */
+    gap: 1.25rem;
+    /* ایجاد فاصله افقی بین دو کارت پایین */
 }
 
 .team-member .card {
-    flex: 1; /* تقسیم مساوی عرض کل بخش بین هر دو کارت */
+    flex: 1;
+    /* تقسیم مساوی عرض کل بخش بین هر دو کارت */
 }
 
 .av {
@@ -650,19 +658,19 @@ nav a:hover {
     color: var(--blu)
 }
 
-.sepehr{
+.sepehr {
     background-image: url(../img/sepehr.jpg);
     background-position: center;
     background-size: cover;
 }
 
-.meraj{
+.meraj {
     background-image: url(../img/meraj.jpg);
     background-position: center;
     background-size: cover;
 }
 
-.shayan{
+.shayan {
     background-image: url(../img/shayan.png);
     background-position: center;
     background-size: cover;
@@ -677,18 +685,18 @@ nav a:hover {
 }
 
 /* به طور پیش‌فرض هر کارت ۲ ستون از ۶ ستون (معادل یک‌‌سوم کل سطر) را می‌گیرد */
-.auto-grid > .card {
+.auto-grid>.card {
     grid-column: span 2;
 }
 
 /* ۱. اگر ۱ کارت در سطر آخر باقی ماند (تعداد کل: 1، 4، 7، 10 و ...) -> کل ۶ ستون را می‌پوشاند */
-.auto-grid > .card:nth-child(3n+1):last-child {
+.auto-grid>.card:nth-child(3n+1):last-child {
     grid-column: span 6;
 }
 
 /* ۲. اگر ۲ کارت در سطر آخر باقی ماندند (تعداد کل: 2، 5، 8، 11 و ...) -> هر کدام ۳ ستون از ۶ ستون (دقیقاً ۵۰٪ مساوی) را می‌گیرند */
-.auto-grid > .card:nth-child(3n+1):nth-last-child(2),
-.auto-grid > .card:nth-child(3n+1):nth-last-child(2) ~ .card {
+.auto-grid>.card:nth-child(3n+1):nth-last-child(2),
+.auto-grid>.card:nth-child(3n+1):nth-last-child(2)~.card {
     grid-column: span 3;
 }
 
@@ -697,14 +705,16 @@ nav a:hover {
     .auto-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    .auto-grid > .card,
-    .auto-grid > .card:nth-child(3n+1):last-child,
-    .auto-grid > .card:nth-child(3n+1):nth-last-child(2),
-    .auto-grid > .card:nth-child(3n+1):nth-last-child(2) ~ .card {
+
+    .auto-grid>.card,
+    .auto-grid>.card:nth-child(3n+1):last-child,
+    .auto-grid>.card:nth-child(3n+1):nth-last-child(2),
+    .auto-grid>.card:nth-child(3n+1):nth-last-child(2)~.card {
         grid-column: span 1;
     }
+
     /* در تبلت اگر فرد بود کارت آخر کل سطر را بگیرد */
-    .auto-grid > .card:nth-child(2n+1):last-child {
+    .auto-grid>.card:nth-child(2n+1):last-child {
         grid-column: span 2;
     }
 }
@@ -713,7 +723,8 @@ nav a:hover {
     .auto-grid {
         grid-template-columns: 1fr;
     }
-    .auto-grid > .card {
+
+    .auto-grid>.card {
         grid-column: span 1 !important;
     }
 }
@@ -769,37 +780,83 @@ textarea:focus {
     color: var(--mut)
 }
 
-footer {
-    border-top: 1px solid var(--line);
-    padding: 2.5rem 0;
-    color: var(--mut);
-    font-size: .9rem
+/* تنظیم Body برای چسباندن فوتر به انتهای صفحه */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.foot {
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* کارت‌ها و محتوای وسط صفحه را کش می‌آورد تا فوتر به پایین برود */
+.container {
+    flex: 1;
+}
+
+/* استایل فوتر چسبیده به انتهای صفحه */
+footer {
+    width: 100%;
+    margin-top: auto; /* این خط فوتر را به پایین‌ترین نقطه هدایت می‌کند */
+    padding: 15px 0;
+    border-top: 1px solid rgba(168, 85, 247, 0.2);
+    background: linear-gradient(180deg, rgba(5, 7, 15, 0) 0%, rgba(15, 23, 42, 0.8) 100%);
+    backdrop-filter: blur(5px);
+}
+
+footer .foot {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem
+    font-size: 13px;
+    color: #8b949e;
 }
 
-.soc {
+footer .soc {
     display: flex;
-    gap: .8rem;
-    flex-wrap: wrap
+    align-items: center;
+    gap: 12px;
 }
 
-.soc a {
-    padding: .3rem 1rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    transition: box-shadow .3s, color .3s
+footer .soc a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    background: rgba(22, 27, 34, 0.6);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    border-radius: 8px;
+    color: #c9d1d9;
+    transition: all 0.3s ease;
 }
 
-.soc a:hover {
-    color: var(--ink);
-    box-shadow: 0 0 18px rgba(139, 107, 255, .5)
+footer .soc a:hover {
+    border-color: #c084fc;
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px rgba(192, 132, 252, 0.3);
+}
+
+footer .soc svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+@media screen and (max-width: 600px) {
+    footer .foot {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
 }
 
 .rv {
@@ -1027,14 +1084,14 @@ footer {
     display: block;
 }
 
-.not-broadcasted{
+.not-broadcasted {
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.not-broadcasted a{
+.not-broadcasted a {
     margin-top: .4rem;
     width: fit-content;
 }
