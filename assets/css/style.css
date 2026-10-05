@@ -1,21 +1,4 @@
-/* تعریف متغیرها برای تم تیره (پیش‌فرض) */
-/* تعریف متغیرها برای تم تیره (پیش‌فرض) */
-:root,
-[data-bs-theme="dark"] {
-    --bg: #060714;
-    --bg2: #0d1030;
-    --ink: #eceeff;
-    --mut: #aab0dc;
-    --vio: #7b6bef;
-    --blu: #4aa8ff;
-    --ind: #2b3290;
-    --pink: #4fd8e8;
-    --cy2: #8fefe0;
-    --join: #eceeff;
-    --line: rgba(160, 170, 255, .18);
-    --card: rgba(20, 24, 64, .62);
-    --header-bg: rgba(6, 7, 20, .72);
-    --hero-title-deg1: #fff;
+
     --hero-title-deg2: #b9d4ff;
     --hero-title-deg3: #8fefe0;
 
