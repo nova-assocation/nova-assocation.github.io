@@ -671,10 +671,16 @@ nav a:hover {
 }
 
 .shayan {
-    background-image: url(../img/shayan.png);
+    background: url(../img/shayan.png);
     background-position: center;
     background-size: cover;
+
 }
+
+.shayan-card .av{
+    background-color: #fff;
+}
+
 
 /*  */
 /* شبکه ۶ ستونه برای تقسیم‌پذیری دقیق بر ۳ و ۲ */
