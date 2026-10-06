@@ -106,6 +106,26 @@ body {
     font-family: 'Pacifico', cursive;
 }
 
+.typographi{
+    color: var(--txt-white);
+}
+
+.nova-logo{
+    width: 50px;
+}
+
+/* تنظیمات ویژه برای صفحه‌های کوچک‌تر از 820 پیکسل (موبایل) */
+@media (max-width: 600px) {
+    /* ۱. تغییر سایز لوگو در موبایل */
+    .nova-logo {
+        width: 55px;
+    }
+
+    /* ۲. مخفی کردن متن انگلیسی NOVA در موبایل */
+    .brand .typographi {
+        display: none;
+    }
+}
 /* استایل دکمه تغییر تم مدرن */
 .theme-switch {
     background: transparent;
