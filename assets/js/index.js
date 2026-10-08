@@ -1,30 +1,86 @@
 (function () {
-    // ۱. تنظیمات بوم ستاره‌ها (Canvas)
-    var c = document.getElementById('sky'), x, S = [], W, H, dpr = Math.min(devicePixelRatio || 1, 2);
-    
-    function size() {
-        if (!c) return;
-        x = c.getContext('2d');
-        W = innerWidth; H = innerHeight; c.width = W * dpr; c.height = H * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0);
-        S = []; var n = Math.round(W * H / 5500); 
-        for (var i = 0; i < n; i++) S.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.3 + .2, p: Math.random() * 6.28, v: Math.random() * .02 + .005, h: Math.random() < .2 ? '#9fe8ec' : Math.random() < .4 ? '#a9c9ff' : '#ffffff' });
-    }
+// ۱. تنظیمات بوم ستاره‌ها (Canvas) - جذب نرم و بدون کشیدگی
+    try {
+        var c = document.getElementById('sky'), x, S = [], W, H, dpr = Math.min(devicePixelRatio || 1, 2);
+        var mouse = { x: null, y: null, radius: 120 };
 
-    function draw(t) {
-        if (!x) return;
-        x.clearRect(0, 0, W, H); 
-        for (var i = 0; i < S.length; i++) { 
-            var s = S[i], a = .45 + .55 * Math.sin(s.p + t * s.v * .06); 
-            x.globalAlpha = a; x.fillStyle = s.h; x.beginPath(); x.arc(s.x, s.y, s.r, 0, 6.28); x.fill(); 
+        window.addEventListener('mousemove', function (e) {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseleave', function () {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        function size() {
+            if (!c) return;
+            x = c.getContext('2d');
+            W = innerWidth; H = innerHeight; c.width = W * dpr; c.height = H * dpr; x.setTransform(dpr, 0, 0, dpr, 0, 0);
+            S = []; var n = Math.round(W * H / 5500); 
+            for (var i = 0; i < n; i++) {
+                var rx = Math.random() * W;
+                var ry = Math.random() * H;
+                S.push({ 
+                    x: rx, 
+                    y: ry, 
+                    ox: rx, 
+                    oy: ry, 
+                    r: Math.random() * 1.3 + .2, 
+                    p: Math.random() * 6.28, 
+                    v: Math.random() * .02 + .005, 
+                    h: Math.random() < .2 ? '#9fe8ec' : Math.random() < .4 ? '#a9c9ff' : '#ffffff' 
+                });
+            }
         }
-        x.globalAlpha = 1; 
-        if (!matchMedia('(prefers-reduced-motion:reduce)').matches) requestAnimationFrame(draw);
-    }
 
-    if (c) {
-        size(); 
-        addEventListener('resize', size); 
-        requestAnimationFrame(draw);
+        function draw(t) {
+            if (!x) return;
+            x.clearRect(0, 0, W, H); 
+            var isDark = document.documentElement.getAttribute('data-bs-theme') !== 'light';
+
+            for (var i = 0; i < S.length; i++) { 
+                var s = S[i];
+
+                if (isDark && mouse.x !== null && mouse.y !== null) {
+                    var dx = mouse.x - s.x;
+                    var dy = mouse.y - s.y;
+                    var dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < mouse.radius && dist > 0) {
+                        var force = (mouse.radius - dist) / mouse.radius;
+                        // استفاده از حرکت نرم (Lerp) با جابه‌جایی بسیار کم جهت جلوگیری از کشیدگی
+                        s.x += (dx / dist) * force * 0.8;
+                        s.y += (dy / dist) * force * 0.8;
+                    } else {
+                        // بازگشت ملایم به نقطه اصلی
+                        s.x += (s.ox - s.x) * 0.03;
+                        s.y += (s.oy - s.y) * 0.03;
+                    }
+                } else {
+                    s.x += (s.ox - s.x) * 0.03;
+                    s.y += (s.oy - s.y) * 0.03;
+                }
+
+                var a = .45 + .55 * Math.sin(s.p + t * s.v * .06); 
+                x.globalAlpha = a; 
+                x.fillStyle = s.h; 
+                x.beginPath(); 
+                x.arc(s.x, s.y, s.r, 0, 6.28); 
+                x.fill(); 
+            }
+            x.globalAlpha = 1; 
+            if (!matchMedia('(prefers-reduced-motion:reduce)').matches) requestAnimationFrame(draw);
+        }
+
+        if (c) {
+            size(); 
+            addEventListener('resize', size); 
+            requestAnimationFrame(draw);
+        }
+    } catch (err) {
+        console.warn('Star canvas effect skipped:', err);
     }
 
     // ۲. انیمیشن هنگام اسکرول (Intersection Observer)
