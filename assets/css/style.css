@@ -14,7 +14,7 @@
     --join: #eceeff;
     --line: rgba(160, 170, 255, .18);
     --card: rgba(20, 24, 64, .62);
-    --header-bg: rgba(6, 7, 20, .72);
+    --header-bg: linear-gradient(135deg, rgba(123, 44, 191, 0.45) 0%, rgba(72, 12, 168, 0.35) 50%, rgba(15, 0, 33, 0.6) 100%);
     --hero-title-deg1: #fff;
     --hero-title-deg2: #b9d4ff;
     --hero-title-deg3: #8fefe0;
@@ -57,7 +57,7 @@
     --join: #1a1c2e;
     --line: rgba(60, 70, 150, .18);
     --card: rgba(255, 255, 255, .85);
-    --header-bg: rgba(244, 246, 252, .82);
+    --header-bg: linear-gradient(135deg, rgba(60, 0, 129, 0.95) 0%, rgba(45, 0, 97, 0.92) 50%, rgba(15, 0, 33, 0.95) 100%);
     --hero-title-deg1: #1a1c2e;
     --hero-title-deg2: #3b45a9;
     --hero-title-deg3: #008b9b;
@@ -80,6 +80,9 @@
     --img-bg-4: linear-gradient(180deg, #e2e7f8 30%, #8591eb 75%, #a8eff7);
     --img-bg-5: radial-gradient(circle at 60% 35%, #ffffff 0, #8eb7f0 10%, transparent 11%), radial-gradient(circle at 40% 70%, #b29eff 0, transparent 45%), #d1d8f7;
     --img-bg-6: radial-gradient(ellipse at 50% 55%, #e1f7f9 0, #83aee8 25%, #767cc7 55%, #cdd4f7 80%);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 *,
@@ -106,16 +109,25 @@ body {
     font-family: 'Pacifico', cursive;
 }
 
-.typographi{
+.typographi {
     color: var(--txt-white);
 }
 
-.nova-logo{
+.nova-logo {
     width: 50px;
+}
+
+[data-bs-theme="dark"] .light {
+    display: none;
+}
+
+[data-bs-theme="light"] .dark {
+    display: none;
 }
 
 /* تنظیمات ویژه برای صفحه‌های کوچک‌تر از 820 پیکسل (موبایل) */
 @media (max-width: 600px) {
+
     /* ۱. تغییر سایز لوگو در موبایل */
     .nova-logo {
         width: 55px;
@@ -126,6 +138,7 @@ body {
         display: none;
     }
 }
+
 /* استایل دکمه تغییر تم مدرن */
 .theme-switch {
     background: transparent;
@@ -178,6 +191,39 @@ body {
 
 html[data-bs-theme="light"] .theme-switch-thumb {
     transform: translateX(-26px);
+}
+
+/* =========================
+    NOVA — Light Theme
+   ========================= */
+
+[data-bs-theme="light"] .nova .p1 circle {
+    fill: #159c9c;
+}
+
+[data-bs-theme="light"] .nova .p2 circle {
+    fill: #5478c8;
+}
+
+[data-bs-theme="light"] .nova .p3 circle {
+    fill: #d18a36;
+}
+
+/* هاله‌ی ستاره مرکزی */
+[data-bs-theme="light"] .nova .halo {
+    opacity: .65;
+    filter: drop-shadow(0 0 8px rgba(70, 160, 185, .18));
+}
+
+/* مدارها */
+[data-bs-theme="light"] .nova>circle:not(.halo) {
+    stroke: rgba(55, 75, 120, .14);
+}
+
+/* حلقه‌ی بیرونی */
+[data-bs-theme="light"] .nova .outer-ring {
+    opacity: .9;
+    filter: drop-shadow(0 0 5px rgba(100, 85, 200, .25));
 }
 
 
@@ -274,7 +320,7 @@ header {
     top: 0;
     z-index: 20;
     backdrop-filter: blur(14px);
-    background: rgba(6, 7, 20, .72);
+    background: var(--header-bg);
     border-bottom: 1px solid var(--line)
 }
 
@@ -697,7 +743,7 @@ nav a:hover {
 
 }
 
-.shayan-card .av{
+.shayan-card .av {
     background-color: #fff;
 }
 
@@ -806,8 +852,22 @@ textarea:focus {
     color: var(--mut)
 }
 
+.info a{
+    margin: .2rem 0 1rem;
+    color: var(--mut);
+}
+
+.info b{
+    display: block;
+}
+
+.info a{
+    display: inline-block;
+}
+
 /* تنظیم Body برای چسباندن فوتر به انتهای صفحه */
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -827,11 +887,16 @@ body {
 /* استایل فوتر چسبیده به انتهای صفحه */
 footer {
     width: 100%;
-    margin-top: auto; /* این خط فوتر را به پایین‌ترین نقطه هدایت می‌کند */
+    margin-top: auto;
+    /* این خط فوتر را به پایین‌ترین نقطه هدایت می‌کند */
     padding: 15px 0;
     border-top: 1px solid rgba(168, 85, 247, 0.2);
     background: linear-gradient(180deg, rgba(5, 7, 15, 0) 0%, rgba(15, 23, 42, 0.8) 100%);
     backdrop-filter: blur(5px);
+}
+
+footer .foot .text{
+    color: var(--ink);
 }
 
 footer .foot {
