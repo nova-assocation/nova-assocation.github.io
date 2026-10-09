@@ -961,55 +961,177 @@ footer .soc svg {
     transform: none
 }
 
+/* ==========================================
+   استایل‌های کامل و بدون بلور منوی کشویی
+   ========================================== */
+
+#nav,
+.nav-overlay {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+}
+
+.header-left-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-right: auto;
+}
+
+.nav-mobile-logins,
+.nav-header-mobile {
+    display: none;
+}
+
+.menu svg path {
+    fill: #ffffff !important;
+}
+
+/* لایه تاریک‌کننده کل صفحه */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.45) !important;
+    z-index: 99998 !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.nav-overlay.active {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
 @media(max-width:820px) {
-    nav {
-        position: absolute;
-        top: 4rem;
-        right: 0;
-        left: 0;
-        flex-direction: column;
-        gap: 0;
-        background: rgba(6, 7, 20, .96);
-        border-bottom: 1px solid var(--line);
-        display: none
-    }
-
-    nav.open {
-        display: flex
-    }
-
-    nav a {
-        padding: .9rem 1.25rem;
-        border-top: 1px solid var(--line)
+    .bar {
+        justify-content: flex-start;
+        gap: 0.6rem;
     }
 
     .menu {
-        display: block
+        display: block;
+        order: 1;
+    }
+
+    .brand {
+        order: 2;
+    }
+
+    .header-left-actions {
+        order: 3;
+        margin-right: auto;
+    }
+
+    /* پنل کشویی با پس‌زمینه جامد بدون بلور */
+    nav#nav {
+        position: fixed !important;
+        top: 0 !important;
+        right: -320px !important;
+        width: 270px !important;
+        height: 100vh !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        background: var(--bg2) !important;
+        border-left: 1px solid var(--line) !important;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5) !important;
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        z-index: 99999 !important;
+        padding: 0 !important;
+        display: flex !important;
+    }
+
+    nav#nav.open {
+        right: 0 !important;
+    }
+
+    .nav-header-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.2rem 1.25rem;
+        border-bottom: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-title-mobile {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--ink);
+    }
+
+    .nav-close-btn {
+        background: transparent;
+        border: none;
+        color: var(--ink);
+        font-size: 2rem;
+        line-height: 1;
+        cursor: pointer;
+        padding: 0;
+        opacity: 0.8;
+    }
+
+    nav#nav a {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--line);
+        color: var(--ink) !important;
+        font-weight: 500;
+        font-size: 0.95rem;
+        text-decoration: none;
+        display: block;
+        transition: background 0.2s;
+    }
+
+    nav#nav a:hover {
+        background: var(--bg-meta);
+        color: var(--cy2) !important;
     }
 
     .about,
     .join {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     section {
-        padding: 3.5rem 0
+        padding: 3.5rem 0;
     }
 }
 
+@media(max-width:620px) {
+    .logins .login-desktop-btn {
+        display: none !important;
+    }
+
+    .nav-mobile-logins {
+        display: block;
+        padding: 1.25rem;
+        margin-top: auto;
+    }
+
+    .btn-login-mobile {
+        display: block;
+        text-align: center;
+        width: 100%;
+        font-size: 0.85rem;
+    }
+}
 @media(prefers-reduced-motion:reduce) {
     * {
         animation: none !important;
-        transition: none !important
+        transition: none !important;
     }
 
     .rv {
         opacity: 1;
-        transform: none
+        transform: none;
     }
 
     html {
-        scroll-behavior: auto
+        scroll-behavior: auto;
     }
 }
 
