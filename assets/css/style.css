@@ -1100,25 +1100,6 @@ footer .soc svg {
         padding: 3.5rem 0;
     }
 }
-
-@media(max-width:620px) {
-    .logins .login-desktop-btn {
-        display: none !important;
-    }
-
-    .nav-mobile-logins {
-        display: block;
-        padding: 1.25rem;
-        margin-top: auto;
-    }
-
-    .btn-login-mobile {
-        display: block;
-        text-align: center;
-        width: 100%;
-        font-size: 0.85rem;
-    }
-}
 @media(prefers-reduced-motion:reduce) {
     * {
         animation: none !important;
@@ -1132,6 +1113,122 @@ footer .soc svg {
 
     html {
         scroll-behavior: auto;
+    }
+}
+
+/* ==========================================
+   ترازبندی کامل هدر و منو (Desktop & Mobile)
+   ========================================== */
+
+/* چیدمان کلی کادر بنفش هدر */
+header .wrap.bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 15px !important;
+    position: relative !important;
+}
+
+/* منوی افقی دسکتاپ (دقیقاً وسط کادر هدر) */
+.desktop-nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+}
+
+.desktop-nav a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+    transition: color 0.2s ease, opacity 0.2s ease !important;
+    opacity: 0.9 !important;
+}
+
+.desktop-nav a:hover {
+    opacity: 1 !important;
+    color: #8fefe0 !important;
+}
+
+/* اکشن‌های سمت چپ */
+.header-left-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+/* مدیریت نمایش در دسکتاپ (بزرگتر از 820px) */
+@media (min-width: 821px) {
+    .desktop-nav {
+        display: flex !important;
+    }
+    .menu,
+    #nav.mobile-nav,
+    .nav-overlay {
+        display: none !important;
+    }
+}
+
+/* مدیریت نمایش در موبایل (کوچکتر از 820px) */
+@media (max-width: 820px) {
+    .desktop-nav {
+        display: none !important; /* مخفی شدن منوی افقی */
+    }
+    .menu {
+        display: inline-flex !important; /* نمایش دکمه همبرگری */
+    }
+
+    /* استایل منوی کشویی موبایل (خارج از هدر) */
+    #nav.mobile-nav {
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important;
+        width: 280px !important;
+        height: 100vh !important;
+        background: #0f0c29 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 25px 20px !important;
+        gap: 15px !important;
+        z-index: 99999 !important;
+        transition: right 0.3s ease !important;
+        box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    #nav.mobile-nav.active {
+        right: 0 !important;
+    }
+
+    .nav-header-mobile {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding-bottom: 15px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .nav-close-btn {
+        background: none !important;
+        border: none !important;
+        color: #fff !important;
+        font-size: 28px !important;
+        cursor: pointer !important;
+    }
+
+    .nav-overlay {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: rgba(0, 0, 0, 0.6) !important;
+        z-index: 99998 !important;
+        display: none;
+    }
+
+    .nav-overlay.active {
+        display: block !important;
     }
 }
 
