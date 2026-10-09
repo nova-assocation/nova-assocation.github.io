@@ -17,11 +17,11 @@
 <body>
     <canvas id="sky" aria-hidden="true"></canvas>
 
-    <!-- ۱. لایه تیره پس‌زمینه (قبل از header) -->
+    <!-- ۱. لایه تیره پس‌زمینه موبایل -->
     <div class="nav-overlay" id="navOverlay"></div>
 
-    <!-- ۲. منوی کشویی Off-Canvas (خارج از header جهت جلوگیری از ارث‌بری بلور) -->
-    <nav id="nav">
+    <!-- ۲. منوی کشویی Off-Canvas مخصوص موبایل (خارج از header جهت حل مشکل بلور) -->
+    <nav id="nav" class="mobile-nav">
         <div class="nav-header-mobile">
             <span class="nav-title-mobile Pacifico-font">NOVA</span>
             <button class="nav-close-btn" id="navCloseBtn" type="button" aria-label="بستن منو">&times;</button>
@@ -37,10 +37,10 @@
         </div>
     </nav>
 
-    <!-- ۳. بخش هدر اصلی -->
+    <!-- ۳. هدر اصلی سایت -->
     <header>
         <div class="wrap bar">
-            <!-- دکمه منوی همبرگری (سمت راست لوگو در موبایل) -->
+            <!-- دکمه همبرگری موبایل -->
             <button class="menu" type="button" aria-expanded="false" aria-controls="nav" aria-label="باز کردن منو">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z" fill="#ffffff"/>
@@ -48,15 +48,24 @@
                     <path d="M3 17.0645C2.44772 17.0645 2 17.5122 2 18.0645C2 18.6167 2.44772 19.0645 3 19.0645H21C21.5523 19.0645 22 18.6167 22 18.0645C22 17.5122 21.5523 17.0645 21 17.0645H3Z" fill="#ffffff"/>
                 </svg>
             </button>
-
-            <!-- لوگو -->
+            <!-- سمت راست: لوگو -->
             <a class="brand" href="../index.html#top" aria-label="انجمن نجوم نوا">
                 <img src="../assets/icons/nova-light.png" alt="logo" class="nova-logo light">
                 <img src="../assets/icons/nova-light.png" alt="logo" class="nova-logo dark">
                 <h3 class="Pacifico-font typographi">NOVA</h3>
             </a>
 
-            <!-- بخش اکشن‌های سمت چپ (ورود، عضویت و سوئیچ تم) -->
+            <!-- وسط: لینک‌های منوی دسکتاپ (دقیقاً داخل کادر بنفش) -->
+            <div class="desktop-nav">
+                <a href="../index.html#about">درباره ما</a>
+                <a href="../index.html#events">رویدادها</a>
+                <a href="../index.html#news">اخبار</a>
+                <a href="../index.html#gallery">گالری</a>
+                <a href="../index.html#team">اعضا</a>
+                <a href="../index.html#join">عضویت</a>
+            </div>
+
+            <!-- سمت چپ: دکمه‌های ورود/عضویت + تغییر تم + همبرگری موبایل -->
             <div class="header-left-actions">
                 <div class="logins">
                     <a href="../login/login2.html" class="btn p-2 login-desktop-btn" style="font-size: 10px;">ورود اعضا</a>
