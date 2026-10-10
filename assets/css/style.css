@@ -1342,3 +1342,64 @@ header .wrap.bar {
     margin-top: .4rem;
     width: fit-content;
 }
+
+/* ==========================================
+   استایل بخش ویدیوها (هماهنگ با گالری و سایت)
+   ========================================== */
+
+#videos .grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    margin-bottom: 1rem;
+}
+
+#videos .card {
+    padding: 1rem;
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+
+#videos .card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(139, 107, 255, .6);
+    box-shadow: 0 10px 40px rgba(139, 107, 255, .2);
+}
+
+/* کانتینر ریسپانسیو برای فریم ویدیو آپارات (نسبت تصویر ۱۶:۹) */
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* نسبت استاندارد ۱۶:۹ */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 12px;
+}
+
+#videos .card h3 {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    color: var(--ink);
+    font-weight: 700;
+}
+
+/* استایل دکمه‌ی مشاهده آرشیو ویدیوها (مشابه دکمه گالری) */
+.btn-videos {
+    width: 100%;
+    margin-bottom: .6rem;
+    text-align: center;
+}
