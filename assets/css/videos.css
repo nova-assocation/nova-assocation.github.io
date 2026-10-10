@@ -1,0 +1,104 @@
+/* ==========================================
+   استایل آرشیو کامل ویدیوها (شبکه ۶ ستونه هوشمند)
+   ========================================== */
+
+/* شبکه ۶ ستونه برای کنترل دقیق چیدمان ۳تایی، ۲تایی و تک‌تایی */
+.video-archive-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* به طور پیش‌فرض هر کارت ویدیو ۲ ستون از ۶ ستون (معادل یک‌سوم کل عرض) را می‌گیرد */
+.video-archive-grid > .video-card {
+    grid-column: span 2;
+}
+
+/* ۱. اگر ۱ کارت در سطر آخر باقی ماند (تعداد کل ویدیوها: 1، 4، 7، 10 و ...) -> کل ۶ ستون (عرض کامل) را می‌گیرد */
+.video-archive-grid > .video-card:nth-child(3n+1):last-child {
+    grid-column: span 6;
+}
+
+/* ۲. اگر ۲ کارت در سطر آخر باقی ماندند (تعداد کل: 2، 5، 8، 11 و ...) -> هر کدام ۳ ستون از ۶ ستون (دقیقاً ۵۰٪ مساوی) را می‌گیرند */
+.video-archive-grid > .video-card:nth-child(3n+1):nth-last-child(2),
+.video-archive-grid > .video-card:nth-child(3n+1):nth-last-child(2) ~ .video-card {
+    grid-column: span 3;
+}
+
+/* کارت اختصاصی ویدیو */
+.video-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0.9rem;
+    border-radius: 18px;
+    height: 100%;
+}
+
+.video-card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-top: 1rem;
+    gap: 0.5rem; /* فاصله منظم بین اجزا (عنوان، توضیحات و تهیه‌کننده) */
+}
+
+/* عنوان ویدیو */
+.video-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* توضیحات ویدیو */
+.video-desc {
+    font-size: 0.9rem;
+    color: var(--mut);
+    margin: 0;
+    line-height: 1.7;
+}
+
+/* بخش مشخصات و تهیه‌کننده (چسبیده به انتهای کارت) */
+.video-meta {
+    margin-top: auto; /* هدایت تهیه‌کننده به انتهای کارت جهت یکسان شدن ارتفاع */
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+    color: var(--mut);
+}
+
+.video-meta strong {
+    color: var(--pink);
+    font-weight: 600;
+}
+
+/* واکنش‌گرایی برای تبلت و موبایل */
+@media (max-width: 900px) {
+    .video-archive-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .video-archive-grid > .video-card,
+    .video-archive-grid > .video-card:nth-child(3n+1):last-child,
+    .video-archive-grid > .video-card:nth-child(3n+1):nth-last-child(2),
+    .video-archive-grid > .video-card:nth-child(3n+1):nth-last-child(2) ~ .video-card {
+        grid-column: span 1;
+    }
+
+    /* در تبلت اگر تعداد فرد باشد، کارت آخر کل عرض سطر را می‌گیرد */
+    .video-archive-grid > .video-card:nth-child(2n+1):last-child {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .video-archive-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .video-archive-grid > .video-card {
+        grid-column: span 1 !important;
+    }
+}
