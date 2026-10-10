@@ -1304,3 +1304,67 @@ header .wrap.bar {
     margin-bottom: .6rem;
     text-align: center;
 }
+
+/* فاصله گرفتن کلی صفحه از هدر بالا تا روی Navbar نیفتد */
+.detail-page {
+    padding-top: 3.5rem;
+    position: relative;
+}
+
+/* استایل دقیق دکمه بازگشت (مشابه صفحه لاگین) در دسکتاپ */
+.back-link-login {
+    position: fixed;
+    top: 80px; /* پایین‌تر از هدر چسبنده (Sticky Header) تا روی آن نرود */
+    right: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: linear-gradient(135deg, rgba(22, 27, 34, 0.85) 0%, rgba(30, 27, 60, 0.85) 100%);
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    border-radius: 12px;
+    color: #e2e8f0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(168, 85, 247, 0.1);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    z-index: 999;
+    text-decoration: none;
+}
+
+.back-link-login:hover {
+    border-color: #c084fc;
+    color: #38bdf8;
+    box-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
+    transform: translateY(-2px);
+}
+
+.back-link-login svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.gallery-title-box {
+    margin-bottom: 2rem;
+}
+
+/* تنظیمات واکنش‌گرا برای موبایل */
+@media screen and (max-width: 768px) {
+    .detail-page {
+        padding-top: 1.5rem;
+    }
+
+    /* در موبایل دکمه از حالت fixed خارج میشه و میاد کنار/بالای عنوان به صورت طبیعی قرار میگیره */
+    .back-link-login {
+        position: static;
+        display: inline-flex;
+        margin-bottom: 1rem;
+        padding: 8px;
+        border-radius: 10px;
+    }
+
+    .back-link-login svg {
+        width: 18px;
+        height: 18px;
+    }
+}
