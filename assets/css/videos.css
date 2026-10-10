@@ -1,38 +1,84 @@
 /* ==========================================
-   استایل آرشیو کامل ویدیوها (شبکه ۶ ستونه هوشمند)
+   شبکه انعطاف‌پذیر ویدیوها با قابلیت پر کردن خودکار سطر آخر
    ========================================== */
 
-/* شبکه ۶ ستونه برای کنترل دقیق چیدمان ۳تایی، ۲تایی و تک‌تایی */
 .video-archive-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
     margin-top: 2rem;
 }
 
-/* به طور پیش‌فرض هر کارت ویدیو ۲ ستون از ۶ ستون (معادل یک‌سوم کل عرض) را می‌گیرد */
+/* کارت‌های عادی: پایه‌شان روی یک‌سوم عرض (۳ تا در هر ردیف) است */
 .video-archive-grid > .video-card {
-    grid-column: span 2;
+    flex: 1 1 calc(33.333% - 1rem); /* flex-grow: 1 باعث می‌شود فضای خالی را پر کنند */
+    min-width: 280px; /* حداقل عرض کارت برای جلوگیری از کوچکی بیش از حد */
+    box-sizing: border-box;
 }
 
-/* ۱. اگر ۱ کارت در سطر آخر باقی ماند (تعداد کل ویدیوها: 1، 4، 7، 10 و ...) -> کل ۶ ستون (عرض کامل) را می‌گیرد */
-.video-archive-grid > .video-card:nth-child(3n+1):last-child {
-    grid-column: span 6;
+/* کارتی که کلاس wide-card دارد -> همیشه کل عرض سطر (۱۰۰٪) را پر می‌کند */
+.video-archive-grid > .video-card.wide-card {
+    flex: 0 0 100% !important;
 }
 
-/* ۲. اگر ۲ کارت در سطر آخر باقی ماندند (تعداد کل: 2، 5، 8، 11 و ...) -> هر کدام ۳ ستون از ۶ ستون (دقیقاً ۵۰٪ مساوی) را می‌گیرند */
-.video-archive-grid > .video-card:nth-child(3n+1):nth-last-child(2),
-.video-archive-grid > .video-card:nth-child(3n+1):nth-last-child(2) ~ .video-card {
-    grid-column: span 3;
+/* رفع محدودیت عرض کارت‌های شورت */
+.video-card.short-card {
+    max-width: 100% !important;
 }
 
-/* کارت اختصاصی ویدیو */
+/* واکنش‌گرایی برای تبلت و موبایل */
+@media (max-width: 900px) {
+    .video-archive-grid > .video-card {
+        flex: 1 1 calc(50% - 0.75px);
+    }
+}
+
+@media (max-width: 600px) {
+    .video-archive-grid > .video-card,
+    .video-archive-grid > .video-card.wide-card {
+        flex: 1 1 100% !important;
+    }
+}
+
+/* ==========================================
+    کلاس سفارشی برای کشیده شدن کارت به کل عرض سطر
+   ========================================== */
+.video-archive-grid > .video-card.wide-card {
+    grid-column: span 6 !important; /* در دسکتاپ کل ۶ ستون را پر می‌کند */
+}
+
+/* در تبلت و موبایل به صورت خودکار کل عرض صفحه را می‌گیرد */
+@media (max-width: 900px) {
+    .video-archive-grid > .video-card.wide-card {
+        grid-column: span 2 !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .video-archive-grid > .video-card.wide-card {
+        grid-column: span 1 !important;
+    }
+}
+
+/* ==========================================
+   استایل جدید و جذاب کارت‌های ویدیو و سورس افقی
+   ========================================== */
+
 .video-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 1.2rem;
+    backdrop-filter: blur(6px);
+    transition: transform .3s, border-color .3s, box-shadow .3s;
     display: flex;
     flex-direction: column;
-    padding: 0.9rem;
-    border-radius: 18px;
-    height: 100%;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(139, 107, 255, .6);
+    box-shadow: 0 10px 40px rgba(139, 107, 255, .2);
 }
 
 .video-card-body {
@@ -40,65 +86,87 @@
     flex-direction: column;
     flex-grow: 1;
     margin-top: 1rem;
-    gap: 0.5rem; /* فاصله منظم بین اجزا (عنوان، توضیحات و تهیه‌کننده) */
+    gap: 0.8rem; /* فاصله منظم و زیبا بین اجزا */
 }
 
-/* عنوان ویدیو */
+/* استایل خط جداکننده یا فاصله بین اجزای کارت */
 .video-title {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: 800;
     color: var(--ink);
     margin: 0;
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
-/* توضیحات ویدیو */
 .video-desc {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--mut);
     margin: 0;
-    line-height: 1.7;
+    line-height: 1.8;
 }
 
-/* بخش مشخصات و تهیه‌کننده (چسبیده به انتهای کارت) */
+/* بخش تهیه‌کننده شیک با خط بالا یا پس‌زمینه محو */
 .video-meta {
-    margin-top: auto; /* هدایت تهیه‌کننده به انتهای کارت جهت یکسان شدن ارتفاع */
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--line);
-    font-size: 0.85rem;
+    margin-top: auto;
+    padding-top: 0.8rem;
+    border-top: 1px dashed var(--line); /* خط جداکننده ملایم */
+    font-size: 0.9rem;
     color: var(--mut);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .video-meta strong {
     color: var(--pink);
-    font-weight: 600;
+    font-weight: 700;
 }
 
-/* واکنش‌گرایی برای تبلت و موبایل */
+/* ==========================================
+   اصلاح قطعی ظرف ویدیو در کارت واید (Wide-Card)
+   ========================================== */
+
+.video-archive-grid > .video-card.wide-card {
+    flex: 0 0 100% !important;
+    display: grid;
+    grid-template-columns: 500px 1fr; /* عرض ستون ویدیو در دسکتاپ */
+    gap: 2rem;
+    align-items: center;
+}
+
+/* استفاده از روش استاندارد padding-bottom برای ثبات صددرصدی ارتفاع */
+.video-archive-grid > .video-card.wide-card .video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25% !important; /* نسبت تصویر ۱۶:۹ دقیق بر اساس عرض ستون */
+    height: 0 !important;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #000;
+}
+
+/* فیکس کردن iframe درون کادر */
+.video-archive-grid > .video-card.wide-card .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 12px;
+}
+
+.video-archive-grid > .video-card.wide-card .video-card-body {
+    margin-top: 0;
+    justify-content: center;
+}
+
+/* واکنش‌گرایی برای موبایل و تبلت */
 @media (max-width: 900px) {
-    .video-archive-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .video-archive-grid > .video-card,
-    .video-archive-grid > .video-card:nth-child(3n+1):last-child,
-    .video-archive-grid > .video-card:nth-child(3n+1):nth-last-child(2),
-    .video-archive-grid > .video-card:nth-child(3n+1):nth-last-child(2) ~ .video-card {
-        grid-column: span 1;
-    }
-
-    /* در تبلت اگر تعداد فرد باشد، کارت آخر کل عرض سطر را می‌گیرد */
-    .video-archive-grid > .video-card:nth-child(2n+1):last-child {
-        grid-column: span 2;
-    }
-}
-
-@media (max-width: 600px) {
-    .video-archive-grid {
+    .video-archive-grid > .video-card.wide-card {
         grid-template-columns: 1fr;
-    }
-
-    .video-archive-grid > .video-card {
-        grid-column: span 1 !important;
+        gap: 1rem;
     }
 }
+
+
