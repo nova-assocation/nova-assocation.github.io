@@ -1331,69 +1331,6 @@ header .wrap.bar {
     }
 }
 
-/* استایل‌های گالری کامل */
-.full-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
-
-.gallery-card {
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.gallery-img-wrap {
-    height: 200px;
-    position: relative;
-    overflow: hidden;
-}
-
-.gallery-img-wrap i,
-.gallery-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    position: absolute;
-    inset: 0;
-    transition: transform 0.5s ease;
-}
-
-.gallery-card:hover .gallery-img-wrap i,
-.gallery-card:hover .gallery-img-wrap img {
-    transform: scale(1.08);
-}
-
-.gallery-card-body {
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.gallery-card-body h3 {
-    font-size: 1.1rem;
-    margin: 0.4rem 0;
-}
-
-.gallery-card-body p {
-    font-size: 0.9rem;
-    color: var(--mut);
-    margin-bottom: 1rem;
-    flex-grow: 1;
-}
-
-.gallery-meta {
-    color: var(--cy2);
-    font-size: 0.8rem;
-    border-top: 1px solid var(--line);
-    padding-top: 0.6rem;
-    display: block;
-}
-
 .not-broadcasted {
     text-align: center;
     display: flex;
