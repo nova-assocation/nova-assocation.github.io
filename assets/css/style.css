@@ -1061,13 +1061,13 @@ footer .soc svg {
     .nav-title-mobile {
         font-weight: 700;
         font-size: 1.1rem;
-        color: var(--ink);
+        color: var(--txt-white);
     }
 
     .nav-close-btn {
         background: transparent;
         border: none;
-        color: var(--ink);
+        color: var(--txt-white);
         font-size: 2rem;
         line-height: 1;
         cursor: pointer;
@@ -1078,7 +1078,7 @@ footer .soc svg {
     nav#nav a {
         padding: 1rem 1.25rem;
         border-bottom: 1px solid var(--line);
-        color: var(--ink) !important;
+        color: var(--txt-white) !important;
         font-weight: 500;
         font-size: 0.95rem;
         text-decoration: none;
@@ -1229,105 +1229,6 @@ header .wrap.bar {
 
     .nav-overlay.active {
         display: block !important;
-    }
-}
-
-/* استایل‌های صفحات جزئیات */
-.detail-page {
-    padding-top: 3rem;
-    padding-bottom: 5rem;
-}
-
-.back-link {
-    display: inline-block;
-    margin-bottom: 1.5rem;
-    color: var(--pink);
-    font-size: 0.95rem;
-    transition: transform 0.2s;
-}
-
-.back-link:hover {
-    transform: translateX(5px);
-}
-
-.detail-card {
-    padding: 2.5rem;
-}
-
-.detail-header {
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.detail-header h1 {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    margin: 0.5rem 0 1rem;
-    color: var(--ink);
-}
-
-.event-meta {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    background: var(--bg-meta);
-    padding: 1rem 1.25rem;
-    border-radius: 12px;
-    border: 1px solid var(--line);
-    font-size: 0.95rem;
-    color: var(--ink);
-}
-
-.article-author {
-    color: var(--mut);
-    font-size: 0.9rem;
-}
-
-.detail-content h3 {
-    margin-top: 1.8rem;
-    margin-bottom: 0.8rem;
-    font-size: 1.3rem;
-    color: var(--cy2);
-}
-
-.detail-list {
-    padding-right: 1.2rem;
-    color: var(--mut);
-}
-
-.detail-list li {
-    margin-bottom: 0.5rem;
-}
-
-.detail-box {
-    margin-top: 2rem;
-    padding: 1rem 1.25rem;
-    background: var(--bg-box-vio);
-    border-right: 4px solid var(--vio);
-    border-radius: 8px;
-    font-size: 0.95rem;
-    color: var(--ink);
-}
-
-.article-quote {
-    margin: 2rem 0;
-    padding: 1.2rem 1.5rem;
-    background: rgba(79, 216, 232, 0.08);
-    border-right: 4px solid var(--pink);
-    border-radius: 8px;
-    font-style: italic;
-    color: var(--ink);
-}
-
-.detail-action {
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line);
-}
-
-@media (max-width: 600px) {
-    .detail-card {
-        padding: 1.25rem;
     }
 }
 
