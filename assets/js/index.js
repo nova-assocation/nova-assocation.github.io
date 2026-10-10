@@ -279,4 +279,106 @@ try {
             size();
         }
     }
+    /* ==========================================================================
+        ۶. مدیریت پنل (پاپ‌آپ) ثبت‌نام رویداد
+        - ایمن‌شده در برابر نبودن المان‌ها در سایر صفحات
+        - ارسال اطلاعات به Web3Forms با نام و فامیل تفکیک‌شده، کلاس، آیدی خالی و پیام مشخص
+       ========================================================================== */
+    var openRegModalBtn = document.getElementById('openRegModal');
+    var regModal = document.getElementById('regModal');
+    var regOverlay = document.getElementById('regOverlay');
+    var regCloseBtn = document.getElementById('regCloseBtn');
+    var eventRegForm = document.getElementById('eventRegForm');
+    var eventSubmitBtn = document.getElementById('eventSubmitBtn');
+    var eventOkBox = document.getElementById('eventOkBox');
+
+    // بررسی وجود المان‌ها در صفحه جاری (جهت جلوگیری از بروز خطا در صفخات دیگر)
+    if (openRegModalBtn && regModal && regOverlay) {
+        
+        // تابع باز کردن پنل پاپ‌آپ
+        function openModal() {
+            regModal.classList.add('active');
+            regOverlay.classList.add('active');
+        }
+
+        // تابع بستن پنل پاپ‌آپ
+        function closeModal() {
+            regModal.classList.remove('active');
+            regOverlay.classList.remove('active');
+        }
+
+        // رویدادهای باز و بسته کردن پنل
+        openRegModalBtn.addEventListener('click', openModal);
+        if (regCloseBtn) {
+            regCloseBtn.addEventListener('click', closeModal);
+        }
+        regOverlay.addEventListener('click', closeModal);
+
+        // مدیریت ارسال فرم ثبت‌نام رویداد
+        if (eventRegForm && eventSubmitBtn && eventOkBox) {
+            eventRegForm.onsubmit = function (e) {
+                e.preventDefault();
+
+                var firstName = eventRegForm.first_name ? eventRegForm.first_name.value.trim() : '';
+                var lastName = eventRegForm.last_name ? eventRegForm.last_name.value.trim() : '';
+                var classVal = eventRegForm.c ? eventRegForm.c.value.trim() : '';
+
+                // اعتبارسنجی پر بودن فیلدهای نام، نام خانوادگی و شماره کلاس
+                if (!firstName || !lastName || !classVal) {
+                    eventOkBox.style.display = 'block';
+                    eventOkBox.style.background = 'rgba(255, 99, 132, 0.2)';
+                    eventOkBox.style.color = '#ffb3c1';
+                    eventOkBox.textContent = 'لطفاً نام، نام خانوادگی و شماره کلاس را به طور کامل وارد کنید.';
+                    return;
+                }
+
+                // ترکیب نام و نام خانوادگی برای ارسال در فیلد نام
+                var fullName = firstName + ' ' + lastName;
+
+                eventSubmitBtn.disabled = true;
+                eventSubmitBtn.textContent = 'در حال ارسال ثبت‌نام...';
+                eventOkBox.style.display = 'block';
+                eventOkBox.style.background = 'rgba(74, 168, 255, .15)';
+                eventOkBox.style.color = '#cfe6ff';
+                eventOkBox.textContent = 'در حال ثبت اطلاعات...';
+
+                // آماده‌سازی داده‌ها برای Web3Forms
+                var formData = new FormData();
+                formData.append('access_key', eventRegForm.access_key ? eventRegForm.access_key.value : '');
+                formData.append('subject', eventRegForm.subject ? eventRegForm.subject.value : 'ثبت نام رصد شبی در مدرسه');
+                formData.append('نام و نام خانوادگی', fullName);  // فیلد نام (ترکیب نام و فامیل)
+                formData.append('شماره کلاس', classVal);         // فیلد شماره کلاس
+                formData.append('آیدی', '');                     // آیدی خالی
+                formData.append('پیام', 'ثبت نام رصد شبی در مدرسه'); // پیام مشخص‌شده
+
+                fetch('https://api.web3forms.com/submit', { 
+                    method: 'POST', 
+                    body: formData 
+                })
+                .then(function (res) { 
+                    return res.json(); 
+                })
+                .then(function (data) {
+                    if (data.success) {
+                        eventOkBox.style.background = 'rgba(79, 216, 232, 0.2)';
+                        eventOkBox.style.color = '#8fefe0';
+                        eventOkBox.textContent = 'ثبت‌نام شما با موفقیت انجام شد!';
+                        eventRegForm.reset();
+                        setTimeout(closeModal, 2000); // بستن خودکار پنل بعد از ۲ ثانیه
+                    } else { 
+                        throw new Error(data.message || 'خطا در ثبت‌نام'); 
+                    }
+                })
+                .catch(function () {
+                    eventOkBox.style.background = 'rgba(255, 99, 132, 0.2)';
+                    eventOkBox.style.color = '#ffb3c1';
+                    eventOkBox.textContent = 'مشکلی در ثبت‌نام پیش آمد. لطفاً دوباره تلاش کنید.';
+                })
+                .finally(function () {
+                    eventSubmitBtn.disabled = false;
+                    eventSubmitBtn.textContent = 'ارسال ثبت‌نام';
+                });
+            };
+        }
+    }
 })();
