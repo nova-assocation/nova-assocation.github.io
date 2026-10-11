@@ -1,0 +1,15 @@
+.stellarium-container {
+    width: 100%;
+    height: 75vh;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #0b0f19;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin: 1.5rem 0;
+}
+.stellarium-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
