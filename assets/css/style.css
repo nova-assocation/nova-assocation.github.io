@@ -29,6 +29,7 @@
     --bg-box-vio: rgba(123, 107, 239, 0.12);
     --bg-box-pink: rgba(79, 216, 232, 0.08);
     --nav-link: #aab0dc;
+    --back-link: linear-gradient(135deg, rgba(22, 27, 34, 0.85) 0%, rgba(30, 27, 60, 0.85) 100%);
 
     /* پس‌زمینه‌های گالری */
     --img-bg-1: radial-gradient(circle at 30% 40%, #4fd8e8 0, transparent 35%), radial-gradient(circle at 70% 60%, #4aa8ff 0, transparent 40%), #1a1450;
@@ -72,6 +73,7 @@
     --bg-box-vio: rgba(90, 73, 224, 0.08);
     --bg-box-pink: rgba(0, 139, 155, 0.08);
     --nav-link: #aab0dc;
+    --back-link: linear-gradient(135deg, rgba(240, 242, 245, 0.95) 0%, rgba(224, 218, 245, 0.95) 100%);
 
     /* پس‌زمینه‌های متناسب با تم روشن */
     --img-bg-1: radial-gradient(circle at 30% 40%, #80e7f2 0, transparent 35%), radial-gradient(circle at 70% 60%, #7ec2ff 0, transparent 40%), #d1d8f7;
@@ -1320,10 +1322,10 @@ header .wrap.bar {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background: linear-gradient(135deg, rgba(22, 27, 34, 0.85) 0%, rgba(30, 27, 60, 0.85) 100%);
+    background: var(--back-link);
     border: 1px solid rgba(168, 85, 247, 0.35);
     border-radius: 12px;
-    color: #e2e8f0;
+    color: var(--ink);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(168, 85, 247, 0.1);
     backdrop-filter: blur(8px);
     transition: all 0.3s ease;
@@ -1349,7 +1351,7 @@ header .wrap.bar {
 }
 
 /* تنظیمات واکنش‌گرا برای موبایل */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
     .detail-page {
         padding-top: 1.5rem;
     }
@@ -1357,8 +1359,9 @@ header .wrap.bar {
     /* در موبایل دکمه از حالت fixed خارج میشه و میاد کنار/بالای عنوان به صورت طبیعی قرار میگیره */
     .back-link-login {
         position: static;
-        display: inline-flex;
-        margin-bottom: 1rem;
+        display: inline-block;
+        margin-bottom: 0.1rem;
+        margin-right: 0.1rem;
         padding: 8px;
         border-radius: 10px;
     }
@@ -1367,4 +1370,88 @@ header .wrap.bar {
         width: 18px;
         height: 18px;
     }
+}
+
+/* صفحه رصد خانه */
+
+.observatory-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+}
+
+.observatory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    font-size: 0.9rem;
+}
+
+.observatory-badge {
+    background: rgba(79, 216, 232, 0.15);
+    color: var(--cy2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.observatory-status {
+    color: var(--mut);
+}
+
+.observatory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.obs-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-meta);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+}
+
+.obs-icon {
+    font-size: 1.8rem;
+}
+
+.obs-item small {
+    color: var(--mut);
+    display: block;
+    font-size: 0.8rem;
+}
+
+.obs-item h4 {
+    color: var(--ink);
+    font-size: 1rem;
+    margin: 0;
+    direction: ltr;
+    text-align: right;
+}
+
+/* استایل متن راهنمای پایین ویجت */
+.observatory-card p {
+    margin-top: 1.2rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--mut);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: color 0.3s ease;
+}
+
+/* اگر خواستی کل کارت یا متن با هاور کردن جذاب‌تر بشه */
+.observatory-card:hover p {
+    color: var(--cy2);
 }
