@@ -381,4 +381,103 @@ try {
             };
         }
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const sunriseEl = document.getElementById("sunrise-time");
+        const sunsetEl = document.getElementById("sunset-time");
+        const dayLengthEl = document.getElementById("day-length");
+        const statusEl = document.querySelector(".observatory-status");
+
+        if (!sunriseEl) return;
+
+        const today = new Date().toISOString().split('T')[0];
+        const cachedData = localStorage.getItem('nova_astro_data');
+        const cachedDate = localStorage.getItem('nova_astro_date');
+
+        // اگر اطلاعات امروز از قبل در مرورگر ذخیره شده بود، آنی نمایش بده بدون درخواست به API
+        if (cachedData && cachedDate === today) {
+            renderData(JSON.parse(cachedData));
+            return;
+        }
+
+        // اگر نبود، درخواست بزن و نتیجه رو ذخیره کن
+        const apiKey = "fac9c8b7b93246d1b71121603261110";
+        const city = "Birjand";
+
+        fetch(`https://api.weatherapi.com/v1/astronomy.json?key=${apiKey}&q=${city}&dt=${today}`)
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                return response.json();
+            })
+            .then(data => {
+                if (data.error) throw new Error(data.error.message);
+
+                if (data.astronomy && data.astronomy.astro) {
+                    const astroData = data.astronomy.astro;
+                    
+                    // ذخیره در حافظه مرورگر برای کل روز
+                    localStorage.setItem('nova_astro_data', JSON.stringify(astroData));
+                    localStorage.setItem('nova_astro_date', today);
+
+                    renderData(astroData);
+                } else {
+                    throw new Error("فرمت داده نامعتبر");
+                }
+            })
+            .catch(err => {
+                console.error("خطای API:", err);
+                // اگر کش قدیمی هم بود در صورت خطا می‌تونیم از اون استفاده کنیم، وگرنه پیام خطا
+                if (cachedData) {
+                    renderData(JSON.parse(cachedData));
+                } else {
+                    sunriseEl.textContent = "خطا در دریافت اطلاعات";
+                    sunsetEl.textContent = "لطفا به مسئول فناوری انجمن اطلاع دهید";
+                    dayLengthEl.textContent = "خطای سامانه";
+                    if (statusEl) statusEl.textContent = "وضعیت: نامشخص";
+                }
+            });
+
+        function renderData(astro) {
+            const sunrise = astro.sunrise;
+            const sunset = astro.sunset;
+
+            sunriseEl.textContent = sunrise;
+            sunsetEl.textContent = sunset;
+            dayLengthEl.textContent = calculateDayLength(sunrise, sunset);
+
+            if (statusEl && astro.moon_phase) {
+                const phase = astro.moon_phase;
+                if (phase.includes("Full") || phase.includes("Waxing Gibbous")) {
+                    statusEl.textContent = "وضعیت آسمان: ماه کامل (مناسب عکاسی ماه)";
+                } else if (phase.includes("New") || phase.includes("Crescent")) {
+                    statusEl.textContent = "وضعیت آسمان: عالی برای عکاسی اعماق آسمان ✨";
+                } else {
+                    statusEl.textContent = "وضعیت آسمان: مناسب رصد عمومی 🔭";
+                }
+            }
+        }
+    });
+
+    function calculateDayLength(sunriseStr, sunsetStr) {
+        try {
+            function toMinutes(timeStr) {
+                const [time, modifier] = timeStr.split(' ');
+                let [hours, minutes] = time.split(':').map(Number);
+                if (modifier === 'PM' && hours < 12) hours += 12;
+                if (modifier === 'AM' && hours === 12) hours = 0;
+                return hours * 60 + minutes;
+            }
+
+            const riseMin = toMinutes(sunriseStr);
+            const setMin = toMinutes(sunsetStr);
+            let diffMin = setMin - riseMin;
+            if (diffMin < 0) diffMin += 24 * 60;
+
+            const hours = Math.floor(diffMin / 60);
+            const minutes = diffMin % 60;
+            return `${hours}h & ${minutes}m`;
+        } catch (e) {
+            return "محاسبه‌نشده";
+        }
+    }
 })();
